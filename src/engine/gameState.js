@@ -16,12 +16,10 @@ export function setWorld(w){
 export function getWorld(){
     return world;
 }
-
 // Set the current location
 export function setCurrentLocation(location) {
     currentLocation = location;
 }
-
 // Get the current location
 export function getCurrentLocation() {
     return currentLocation;

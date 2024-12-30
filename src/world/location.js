@@ -10,6 +10,7 @@ class Location {
     npcs;
     type;
     items;
+    visited;
 
     constructor(){
         this.name = "placeholderName";
@@ -18,6 +19,7 @@ class Location {
         this.npcs = ["placeholder","NPCS"];
         this.type = "placeholderTown";
         this.items = ["placeholder","items"];
+        this.visited = false;
     }
 
     setLocationInfo(name, desc, conns, npcs, type, items){
@@ -33,6 +35,9 @@ class Location {
     }
     getName(){
         return this.name;
+    }
+    set visited(bool){
+        this.visited = bool;
     }
 }
 

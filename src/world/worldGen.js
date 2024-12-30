@@ -67,10 +67,10 @@ export function createConnections(locations){
         });
     });
     // Remove the temporary x and y properties
-    locations.forEach(location => {
-        delete location.x;
-        delete location.y;
-    });
+    // locations.forEach(location => {
+    //     delete location.x;
+    //     delete location.y;
+    // });
     return locations;
 }
 

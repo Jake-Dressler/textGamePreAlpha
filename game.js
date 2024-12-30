@@ -4,24 +4,23 @@ import { generateTowns, saveTownsToFile, createConnections, generateWorld } from
 import { getCurrentLocation, setCurrentLocation, getGameTime, advanceTime, getWorld, setWorld } from './src/engine/gameState.js';
 import { displayLocationBaseMenu } from "./src/ui/locationMenus.js";
 import { displayPlayerBaseMenu } from "./src/ui/playerMenus.js";
+import { drawLocationMap } from "./src/ui/locationMap.js";
 import { Player } from "./src/entities/player.js"
 //import { travelTo } from "./src/engine/navigation.js";
 
-
-//displayLocationBaseMenu(testTown);
-//const filePath = "./testWorld"
-//saveTownsToFile(filePath, generateTowns(5));
-// var t = generateTowns(10);
-// createConnections(t);
-// var currentLocation = t[0];
-
-// var testForest = new forest();
-// testForest.generateForest();
+// create player and world
 var player = new Player("test");
-
-setWorld(generateWorld(10,10));
+setWorld(generateWorld(50,50));
 setCurrentLocation(getWorld()[0]);
+
+// TODO: find a way to set intial to visited
+// getCurrentLocation().visited = true; 
+
+// display menus
 displayLocationBaseMenu(getCurrentLocation());
+console.log(getCurrentLocation());
 displayPlayerBaseMenu(player);
+
+drawLocationMap(getCurrentLocation(), 2);
 
 
