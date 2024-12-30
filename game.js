@@ -21,6 +21,6 @@ displayLocationBaseMenu(getCurrentLocation());
 console.log(getCurrentLocation());
 displayPlayerBaseMenu(player);
 
-drawLocationMap(getCurrentLocation(), 2);
+drawLocationMap(getCurrentLocation(), 1);
 
 

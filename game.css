@@ -3,7 +3,7 @@ body {
     font-family: Arial, sans-serif;
     height: 100vh;
     display: grid;
-    grid-template-columns: 175px 1fr 350px; /* Left and right columns of 250px, center column takes remaining space */
+    grid-template-columns: 175px 1fr 325px; /* Left and right columns of 250px, center column takes remaining space */
     grid-template-rows: 1fr; /* Single row */
 }
 
