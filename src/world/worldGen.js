@@ -36,10 +36,9 @@ export function generateForests(numForests){
 
 // TODO: add other location types
 // TODO: change for seeded random
-// TODO: gaurentee reachable nodes
 // create connections between loactions
 export function createConnections(locations){
-    // Temporarily assign random x, y values for triangulation
+    // assign random x, y values for triangulation
     locations.forEach(location => {
         location.x = Math.random() * 1000; // Random x-coordinate
         location.y = Math.random() * 1000; // Random y-coordinate
@@ -66,11 +65,6 @@ export function createConnections(locations){
             }
         });
     });
-    // Remove the temporary x and y properties
-    // locations.forEach(location => {
-    //     delete location.x;
-    //     delete location.y;
-    // });
     return locations;
 }
 
@@ -85,4 +79,9 @@ export function saveTownsToFile(filename, towns){
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+}
+
+// Function to calculate the distance between two points
+function getDistance(x1, y1, x2, y2) {
+    return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
 }

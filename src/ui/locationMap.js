@@ -1,4 +1,4 @@
-import { getWorld, setMapType, getCurrentLocation } from "../engine/gameState.js";
+import { getWorld, setMapType, getCurrentLocation, setMapDepth, setMapScale, getMapDepth, getMapScale, getMapType } from "../engine/gameState.js";
 
 export function drawLocationMap(currentLocation, maxDepth, manualScale = 1.5) {
     const canvas = document.getElementById("diagramCanvas");
@@ -81,23 +81,24 @@ export function drawLocationMap(currentLocation, maxDepth, manualScale = 1.5) {
     traverseLocations(currentLocation, 0, visited);
 }
 
-export function drawLocationMapSimple(currentLocation, depth) {
+export function drawLocationMapSimple(currentLocation, depth, scale = 1) {
     const canvas = document.getElementById("diagramCanvas");
     const ctx = canvas.getContext("2d");
 
-    // Set canvas dimensions
+    // Set canvas dimensions (scaled)
     canvas.width = 300;
     canvas.height = 300;
 
     // Clear the canvas and set background color
-    //ctx.fillStyle = "#303030";
-    //ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // ctx.fillStyle = "#303030"; // Optional: background color
+    // ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     // Center of the canvas
     const centerX = canvas.width / 2;
     const centerY = canvas.height / 2;
-    const radius = 30; // Radius of each circle
-    const connectionRadius = 100; // Distance from the center to first-level connections
+    const radius = 30 * scale; // Radius of each circle (scaled)
+    const connectionRadius = 100 * scale; // Distance from the center to first-level connections (scaled)
 
     // Recursive function to draw connections
     function drawConnections(location, x, y, level, angleStart = 0, angleRange = 2 * Math.PI) {
@@ -159,6 +160,7 @@ export function drawLocationMapSimple(currentLocation, depth) {
     ctx.fillText(currentLocation.name, centerX, centerY);
 }
 
+
 export function setMapButtons(){
     // Select the button element
     const buttonsDiv = document.getElementById("mapButtons");
@@ -166,24 +168,62 @@ export function setMapButtons(){
     // Create default and simple button elements and set properties
     const defaultMapButton = document.createElement("button");
     const simpleMapButton = document.createElement("button");
+    const scaleUpButton = document.createElement("button");
+    const scaleDownButton = document.createElement("button");
+    const depthUpButton = document.createElement("button");
+    const depthDownButton = document.createElement("button");
+
     defaultMapButton.textContent = "default";
     simpleMapButton.textContent = "simple";
+    scaleUpButton.textContent = "scale(+)";
+    scaleDownButton.textContent = "scale(-)";
+    depthUpButton.textContent = "depth(+)";
+    depthDownButton.textContent = "depth(-)";
+
     defaultMapButton.id = "mapButton";
     simpleMapButton.id = "mapButton";
+    scaleUpButton.id = "mapButton";
+    scaleDownButton.id = "mapButton";
+    depthUpButton.id = "mapButton";
+    depthDownButton.id = "mapButton";
 
     // Add an event listeners
     defaultMapButton.addEventListener("click", () => {
         setMapType("default");
-        drawLocationMap(getCurrentLocation(), 2);
+        drawLocationMap(getCurrentLocation(), getMapDepth(), getMapScale());
     });
     simpleMapButton.addEventListener("click", () => {
         setMapType("simple");
-        drawLocationMapSimple(getCurrentLocation(), 1);
+        drawLocationMapSimple(getCurrentLocation(), getMapDepth());
+    });
+    scaleUpButton.addEventListener("click", () => {
+        setMapScale(getMapScale() + 0.1);
+        if(getMapType() == "simple") drawLocationMapSimple(getCurrentLocation(), getMapDepth(), getMapScale());
+        else drawLocationMap(getCurrentLocation(), getMapDepth(), getMapScale());
+    });
+    scaleDownButton.addEventListener("click", () => {
+        setMapScale(getMapScale() - 0.1);
+        if(getMapType() == "simple") drawLocationMapSimple(getCurrentLocation(), getMapDepth(), getMapScale());
+        else drawLocationMap(getCurrentLocation(), getMapDepth(), getMapScale());
+    });
+    depthUpButton.addEventListener("click", () => {
+        setMapDepth(getMapDepth() + 1);
+        if(getMapType() == "simple") drawLocationMapSimple(getCurrentLocation(), getMapDepth(), getMapScale());
+        else drawLocationMap(getCurrentLocation(), getMapDepth(), getMapScale());
+    });
+    depthDownButton.addEventListener("click", () => {
+        setMapDepth(getMapDepth() - 1);
+        if(getMapType() == "simple") drawLocationMapSimple(getCurrentLocation(), getMapDepth(), getMapScale());
+        else drawLocationMap(getCurrentLocation(), getMapDepth(), getMapScale());
     });
 
     // Append the buttons to the div
     buttonsDiv.appendChild(defaultMapButton);
     buttonsDiv.appendChild(simpleMapButton);
+    buttonsDiv.appendChild(scaleUpButton);
+    buttonsDiv.appendChild(scaleDownButton);
+    buttonsDiv.appendChild(depthUpButton);
+    buttonsDiv.appendChild(depthDownButton);
 }
 
 

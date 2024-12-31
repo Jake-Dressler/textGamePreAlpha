@@ -25,7 +25,22 @@ export function setMapType(type){
 export function getMapType(){
     return mapType;
 }
-
+// store map display depth
+let mapDepth = 2;
+export function setMapDepth(depth){
+    mapDepth = depth;
+}
+export function getMapDepth(){
+    return mapDepth;
+}
+// store map scale
+let mapScale = 1.5;
+export function setMapScale(scale){
+    mapScale = scale;
+}
+export function getMapScale(){
+    return mapScale;
+}
 // Set the current location
 export function setCurrentLocation(location) {
     currentLocation = location;
