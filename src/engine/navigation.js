@@ -1,6 +1,6 @@
-import { getCurrentLocation, setCurrentLocation, getGameTime, advanceTime, getWorld } from './gameState.js';
+import { getCurrentLocation, setCurrentLocation, getGameTime, advanceTime, getWorld, getMapType } from './gameState.js';
 import { displayLocationBaseMenu } from "../ui/locationMenus.js";
-import { drawLocationMap } from "../ui/locationMap.js";
+import { drawLocationMap, drawLocationMapSimple } from "../ui/locationMap.js";
 
 export function travelTo(nextLocation) {
     let currentLocation = getCurrentLocation();
@@ -14,7 +14,10 @@ export function travelTo(nextLocation) {
             // Update the current location
             setCurrentLocation(nextLocObj);
             displayLocationBaseMenu(getCurrentLocation());
-            drawLocationMap(getCurrentLocation(), 2);
+            let mapView = getMapType();
+            //console.log(mapView);
+            if (mapView == "simple") drawLocationMapSimple(getCurrentLocation(),  1);
+            else drawLocationMap(getCurrentLocation(), 2);
         } else {
             console.log("ERROR: Next location not found in the towns array.");
         }

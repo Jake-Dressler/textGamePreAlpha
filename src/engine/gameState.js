@@ -16,6 +16,16 @@ export function setWorld(w){
 export function getWorld(){
     return world;
 }
+
+// store map display type
+let mapType = "default";
+export function setMapType(type){
+    mapType = type;
+}
+export function getMapType(){
+    return mapType;
+}
+
 // Set the current location
 export function setCurrentLocation(location) {
     currentLocation = location;
