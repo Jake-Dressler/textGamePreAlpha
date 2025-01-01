@@ -61,6 +61,6 @@ export function getGameTime() {
 }
 
 // You can also expose the clock update method if needed
-export function advanceTime() {
-    clock.advanceTime(); // Advance the time, you can specify how much time to advance
+export function advanceTime(minutes) {
+    clock.advanceTime(minutes); // Advance the time, you can specify how much time to advance
 }

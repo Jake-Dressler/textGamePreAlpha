@@ -37,8 +37,6 @@ export class Clock {
                 this.year++;
             }
         }
-
-        this.displayTime();
     }
 
     // Displays current time in a readable format
