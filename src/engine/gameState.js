@@ -26,7 +26,7 @@ export function getMapType(){
     return mapType;
 }
 // store map display depth
-let mapDepth = 2;
+let mapDepth = 1;
 export function setMapDepth(depth){
     mapDepth = depth;
 }
@@ -34,7 +34,7 @@ export function getMapDepth(){
     return mapDepth;
 }
 // store map scale
-let mapScale = 1.5;
+let mapScale = 2.0;
 export function setMapScale(scale){
     mapScale = scale;
 }

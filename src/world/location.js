@@ -39,6 +39,9 @@ class Location {
     set visited(bool){
         this.visited = bool;
     }
+    isVisited(){
+        return this.visited;
+    }
 }
 
 export class town extends Location{

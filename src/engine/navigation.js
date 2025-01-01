@@ -1,6 +1,6 @@
 import { getCurrentLocation, setCurrentLocation, getGameTime, advanceTime, getWorld, getMapType, getMapDepth, getMapScale } from './gameState.js';
 import { displayLocationBaseMenu } from "../ui/locationMenus.js";
-import { drawLocationMap, drawLocationMapSimple } from "../ui/locationMap.js";
+import { drawLocationMap, drawLocationMapSimple } from "../ui/worldMap.js";
 
 export function travelTo(nextLocation) {
     let currentLocation = getCurrentLocation();

@@ -48,7 +48,7 @@ export function drawLocationMap(currentLocation, maxDepth, manualScale = 1.5) {
                 const connectedX = connectedLocation.x * scale + offsetX;
                 const connectedY = connectedLocation.y * scale + offsetY;
 
-                ctx.strokeStyle = "white";
+                ctx.strokeStyle = "#3e5795";
                 ctx.beginPath();
                 ctx.moveTo(translatedX, translatedY);
                 ctx.lineTo(connectedX, connectedY);
@@ -61,9 +61,9 @@ export function drawLocationMap(currentLocation, maxDepth, manualScale = 1.5) {
         });
 
         // Now draw the circle for the location (on top of the lines)
-        ctx.fillStyle = location === currentLocation ? "yellow" : "lightblue";
+        ctx.fillStyle = location === currentLocation ? "orange" : location.visited ? "lightblue" : "#8a2be2";
         ctx.beginPath();
-        ctx.arc(translatedX, translatedY, radius, 0, Math.PI * 2);
+        ctx.arc(translatedX, translatedY, radius * scale, 0, Math.PI * 2);
         ctx.fill();
         ctx.strokeStyle = "white";
         ctx.stroke();
@@ -73,7 +73,8 @@ export function drawLocationMap(currentLocation, maxDepth, manualScale = 1.5) {
         ctx.fillStyle = "black";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
-        ctx.fillText(location.name, translatedX, translatedY);
+        let nameText = location.visited ? location.name : "???";
+        ctx.fillText(nameText, translatedX, translatedY);
     }
 
     // Start the traversal from the current location
@@ -119,8 +120,11 @@ export function drawLocationMapSimple(currentLocation, depth, scale = 1) {
             ctx.stroke();
             ctx.closePath();
 
+            // Find the location object for the connection
+            const nextLocation = getWorld().find(loc => loc.name === connectionName);
+
             // Draw connection circle
-            ctx.fillStyle = "lightblue";
+            ctx.fillStyle = nextLocation.visited ? "lightblue" : "#8a2be2";;
             ctx.beginPath();
             ctx.arc(childX, childY, radius, 0, Math.PI * 2);
             ctx.fill();
@@ -131,10 +135,9 @@ export function drawLocationMapSimple(currentLocation, depth, scale = 1) {
             ctx.fillStyle = "black";
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
-            ctx.fillText(connectionName, childX, childY);
+            let nameText = nextLocation.visited ? nextLocation.name : "???";
+            ctx.fillText(nameText, childX, childY);
 
-            // Find the location object for the connection
-            const nextLocation = getWorld().find(loc => loc.name === connectionName);
             if (nextLocation) {
                 drawConnections(nextLocation, childX, childY, level + 1, angle - angleStep / 2, angleStep);
             }
@@ -145,7 +148,7 @@ export function drawLocationMapSimple(currentLocation, depth, scale = 1) {
     drawConnections(currentLocation, centerX, centerY, 1);
 
     // Draw current location circle on top
-    ctx.fillStyle = "yellow"; // Current location color
+    ctx.fillStyle = "orange"; // Current location color
     ctx.beginPath();
     ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
     ctx.fill();

@@ -4,7 +4,7 @@ import { generateTowns, saveTownsToFile, createConnections, generateWorld } from
 import { getCurrentLocation, setCurrentLocation, getGameTime, advanceTime, getWorld, setWorld, setMapType, getMapType, getMapDepth, getMapScale } from './src/engine/gameState.js';
 import { displayLocationBaseMenu } from "./src/ui/locationMenus.js";
 import { displayPlayerBaseMenu } from "./src/ui/playerMenus.js";
-import { drawLocationMap, drawLocationMapSimple, setMapButtons } from "./src/ui/locationMap.js";
+import { drawLocationMap, drawLocationMapSimple, setMapButtons } from "./src/ui/worldMap.js";
 import { Player } from "./src/entities/player.js"
 //import { travelTo } from "./src/engine/navigation.js";
 
