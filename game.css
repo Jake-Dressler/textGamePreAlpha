@@ -31,6 +31,7 @@ a:active {
     background-color: #909090;
     padding: 1rem;
     border-right: 1px solid #ddd; /* Optional: adds a dividing line */
+    line-height: 1.8;
 }
 
 .center-column {
@@ -50,4 +51,5 @@ a:active {
     background-color: #f7eeca;
     height: 300px;
     width: 300px;
+    margin: auto;
 }

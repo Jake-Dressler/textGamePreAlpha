@@ -6,11 +6,12 @@ import { displayLocationBaseMenu } from "./src/ui/locationMenus.js";
 import { displayPlayerBaseMenu } from "./src/ui/playerMenus.js";
 import { drawLocationMap, drawLocationMapSimple, setMapButtons } from "./src/ui/worldMap.js";
 import { Player } from "./src/entities/player.js"
+import { drawClock } from "./src/ui/drawClock.js"
 //import { travelTo } from "./src/engine/navigation.js";
 
 // create player and world
 var player = new Player("test");
-setWorld(generateWorld(10,10));
+setWorld(generateWorld(20,30));
 setCurrentLocation(getWorld()[0]);
 
 // TODO: find a way to set intial to visited
@@ -24,5 +25,9 @@ displayPlayerBaseMenu(player);
 // display map and map buttons
 drawLocationMap(getCurrentLocation(), getMapDepth(), getMapScale());
 setMapButtons();
+
+// draw clock
+drawClock();
+
 
 

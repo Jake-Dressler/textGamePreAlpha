@@ -57,7 +57,7 @@ export function setGameTime(time) {
 
 // Get the current game time
 export function getGameTime() {
-    return clock.getTime();
+    return clock.getCurrentTime();
 }
 
 // You can also expose the clock update method if needed
