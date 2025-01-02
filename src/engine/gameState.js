@@ -53,7 +53,18 @@ export function getCurrentLocation() {
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%PLAYER FUNCTIONS%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
+export function getPlayer(){
+    return player;
+}
+export function getPlayerEnergy(){
+    return player.energy;
+}
+export function gainEnergy(amount){
+    player.gainEnergy(amount);
+}
+export function useEnergy(amount){
+    player.useEnergy(amount);
+}
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
