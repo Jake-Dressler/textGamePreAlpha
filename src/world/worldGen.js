@@ -57,18 +57,20 @@ export function createConnections(locations){
 
         neighbors.forEach(neighborIndex => {
             const neighborLocation = locations[neighborIndex];
-            if (!location.connections.includes(neighborLocation.name)) {
-                location.connections.push(neighborLocation.name);
+            if (!Object.keys(location.connections).includes(neighborLocation.name)) {
+                let keyL = neighborLocation.name;
+                location.connections[keyL] = Math.floor(getDistance(location, neighborLocation));
             }
-            if (!neighborLocation.connections.includes(location.name)) {
-                neighborLocation.connections.push(location.name);
+            if (!Object.keys(location.connections).includes(location.name)) {
+                let keyN = location.name;
+                neighborLocation.connections[keyN] = Math.floor(getDistance(location, neighborLocation));
             }
         });
     });
     return locations;
 }
 
-export function saveTownsToFile(filename, towns){
+export function saveWorldToFile(filename, towns){
     // Create a JSON file and trigger a download in the browser
     // TODO: make this not bad | this forces a browser download
     const json = JSON.stringify(towns, null, 2);
@@ -81,7 +83,6 @@ export function saveTownsToFile(filename, towns){
     document.body.removeChild(link);
 }
 
-// Function to calculate the distance between two points
-function getDistance(x1, y1, x2, y2) {
-    return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+function getDistance(currentLoc, nextLoc) {
+    return Math.sqrt((nextLoc.x - currentLoc.x) ** 2 + (nextLoc.y - currentLoc.y) ** 2);
 }

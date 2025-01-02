@@ -4,6 +4,8 @@ export class Player {
         this.name = name; // Player's name
         this.health = 100; // Player's health
         this.maxHealth = 100; // Maximum health
+        this.energy = 80;
+        this.maxEnergy = 80;
         this.attack = 10; // Attack strength
         this.defense = 5; // Defense strength
         this.inventory = []; // Inventory for items

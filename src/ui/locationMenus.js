@@ -1,4 +1,5 @@
 import { travelTo } from "../engine/navigation.js";
+import { getTravelTimeString } from "../utils/timeToTravel.js"
 
 export function displayLocationBaseMenu(Location){
     switch(Location.type){
@@ -10,10 +11,10 @@ export function displayLocationBaseMenu(Location){
             var connectionsList = document.getElementById("connections");
             connectionsList.innerHTML = ""; // Clear previous links
         
-            Location.connections.forEach(connection => {
+            Object.keys(Location.connections).forEach(connection => {
                 const link = document.createElement("a");
                 link.href = "#"; // Or use a proper routing system
-                link.textContent = connection;
+                link.textContent = `${connection} (${getTravelTimeString(Location.connections[connection])})`;
                 link.addEventListener("click", () => travelTo(connection));
                 connectionsList.appendChild(link);
 
@@ -21,7 +22,7 @@ export function displayLocationBaseMenu(Location){
                 const lineBreak = document.createElement("br");
                 connectionsList.appendChild(lineBreak);
             });
-            //console.log(Location.toJSON());
+            break;
         case("FOREST"):
             document.getElementById("locationName").textContent = Location.name;
             document.getElementById("locationDescription").textContent = Location.description;
@@ -30,10 +31,10 @@ export function displayLocationBaseMenu(Location){
             var connectionsList = document.getElementById("connections");
             connectionsList.innerHTML = ""; // Clear previous links
         
-            Location.connections.forEach(connection => {
+            Object.keys(Location.connections).forEach(connection => {
                 const link = document.createElement("a");
                 link.href = "#"; // Or use a proper routing system
-                link.textContent = connection;
+                link.textContent = `${connection} (${getTravelTimeString(Location.connections[connection])})`;
                 link.addEventListener("click", () => travelTo(connection));
                 connectionsList.appendChild(link);
 

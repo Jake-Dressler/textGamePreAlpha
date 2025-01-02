@@ -41,7 +41,7 @@ export function drawLocationMap(currentLocation, maxDepth, manualScale = 1.5) {
         // console.log(translatedX, translatedY); // Debug log to check scaling
 
         // Draw connections to other locations
-        location.connections.forEach(connectionName => {
+        Object.keys(location.connections).forEach(connectionName => {
             const connectedLocation = getWorld().find(loc => loc.name === connectionName);
             if (connectedLocation && !visited.has(connectedLocation.name)) {
                 // Draw the connection line

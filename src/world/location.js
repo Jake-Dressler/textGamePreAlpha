@@ -15,7 +15,7 @@ class Location {
     constructor(){
         this.name = "placeholderName";
         this.description = "placeholderDescription";
-        this.connections = [];
+        this.connections = new Object();
         this.npcs = ["placeholder","NPCS"];
         this.type = "placeholderTown";
         this.items = ["placeholder","items"];
