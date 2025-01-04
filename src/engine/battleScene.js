@@ -1,4 +1,4 @@
-function battleScene(player, enemy) {
+export function battleScene(player, enemy) {
     console.log("A wild " + enemy.name + " appears!");
     console.log("Battle Start!");
 

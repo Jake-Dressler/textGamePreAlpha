@@ -1,6 +1,6 @@
 // src/entities/NPC.js
 
-class NPC {
+export class NPC {
     constructor(name, health, attack, defense, dialog = []) {
         this.name = name; // NPC's name
         this.health = health; // NPC's current health
@@ -64,5 +64,3 @@ class NPC {
         };
     }
 }
-
-module.exports = npc;

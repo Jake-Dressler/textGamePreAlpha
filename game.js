@@ -7,6 +7,8 @@ import { displayPlayerBaseMenu } from "./src/ui/playerMenus.js";
 import { drawLocationMap, drawLocationMapSimple, setMapButtons } from "./src/ui/worldMap.js";
 import { Player } from "./src/entities/player.js"
 import { drawClock } from "./src/ui/drawClock.js"
+import { NPC } from "./src/entities/npc.js"
+import { battleScene } from "./src/engine/battleScene.js";
 //import { travelTo } from "./src/engine/navigation.js";
 
 // create player and world
@@ -28,6 +30,9 @@ setMapButtons();
 
 // draw clock
 drawClock();
+
+var testNpc = new NPC("testman", 10, 5, 5, []);
+battleScene(player, testNpc);
 
 
 
