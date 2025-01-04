@@ -32,7 +32,7 @@ setMapButtons();
 drawClock();
 
 var testNpc = new NPC("testman", 10, 5, 5, []);
-battleScene(player, testNpc);
+//battleScene(player, testNpc);
 
 
 
