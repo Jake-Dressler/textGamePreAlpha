@@ -5,6 +5,7 @@ export function drawPlayerBaseMenu(player){
 
     // Create text divs
     const playerName = document.createElement("div");
+    const playerExp = document.createElement("div");
     const playerHealth = document.createElement("div");
     const playerGold = document.createElement("div");
     const playerLevel = document.createElement("div");
@@ -12,13 +13,15 @@ export function drawPlayerBaseMenu(player){
 
     // Add text to the divs
     playerName.textContent = player.name;
-    playerHealth.textContent = `hp: ${player.health} / ${player.maxHealth}`;
-    playerGold.textContent = `gold: ${player.gold}`;
-    playerLevel.textContent = `lvl: ${player.level}`;
-    playerEnergy.textContent = `energy: ${player.energy} / ${player.maxEnergy}`
+    playerHealth.textContent = `HP: ${player.health} / ${player.maxHealth}`;
+    playerExp.textContent = `EXP: ${player.experience} / ${player.experienceToLevelUp}`;
+    playerGold.textContent = `Gold: ${player.gold}`;
+    playerLevel.textContent = `LVL: ${player.level}`;
+    playerEnergy.textContent = `Energy: ${player.energy} / ${player.maxEnergy}`
 
     parent.appendChild(playerName);
     parent.appendChild(playerHealth);
+    parent.appendChild(playerExp);
     parent.appendChild(playerGold);
     parent.appendChild(playerLevel);
     parent.appendChild(playerEnergy);

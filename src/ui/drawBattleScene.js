@@ -9,7 +9,6 @@ export async function drawBattleScene(npc) {
     while (!battle.isOver()) {
         await updateScene(battle);
     }
-
     drawPostBattleScene(battle.player.health > 0);
 }
 

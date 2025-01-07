@@ -1,8 +1,9 @@
 // src/entities/NPC.js
 
 export class NPC {
-    constructor(name, health, attack, defense, dialog = []) {
+    constructor(name, level, health, attack, defense, dialog = []) {
         this.name = name; // NPC's name
+        this.level = level;
         this.health = health; // NPC's current health
         this.maxHealth = health; // NPC's max health
         this.attack = attack; // NPC's attack strength

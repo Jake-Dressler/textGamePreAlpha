@@ -23,18 +23,20 @@ export class battleScene{
         // effectively gives user the first turn
         this.playerAction(action);
         this.turnCount += 1;
-        
         if(this.enemyDies()){
             this.playerWin = true;
             this.battleOver = true;
+            this.postBattleUpdates();
             return;
         }
+
         // get enemy action and then check if player loses
         // effectively turn two 
         this.getEnemyAction();
         if(this.playerDies()){
             this.playerWin = false;
             this.battleOver = true;
+            this.postBattleUpdates();
         }
         return;
     }
@@ -81,5 +83,17 @@ export class battleScene{
             return true;
         }
         return false;
+    }
+    postBattleUpdates(){
+        if(!this.isOver){
+            console.log("ERROR: post battle updates called before battle is over");
+            return;
+        }
+        if(this.playerWin){
+            this.player.gainExperience(this.getExpGain());
+        }
+    }
+    getExpGain(){
+        return this.enemy.level;
     }
 }

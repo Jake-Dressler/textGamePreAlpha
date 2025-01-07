@@ -37,7 +37,7 @@ export function drawLocationBaseMenu(Location){
 
     var testBattle = document.createElement("a");
     testBattle.textContent = "start a test battle";
-    var testNpc = new NPC("testman", 10, 7, 7, []);
+    var testNpc = new NPC("testman", 2, 10, 7, 7, []);
     testBattle.addEventListener("click", () => drawBattleScene(testNpc));
     centerDiv.appendChild(testBattle);
 
