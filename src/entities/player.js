@@ -31,6 +31,7 @@ export class Player {
     }
     useEnergy(amount){
         this.energy -= amount;
+        if (this.energy < 0) this.energy = 0;
     }
 
     // Adds an item to the player's inventory
@@ -56,10 +57,8 @@ export class Player {
     takeDamage(amount) {
         const damage = Math.max(amount - this.defense, 0);
         this.health -= damage;
-        console.log(`${this.name} takes ${damage} damage!`);
         if (this.health <= 0) {
             this.health = 0;
-            console.log(`${this.name} has fallen!`);
         }
     }
 

@@ -27,12 +27,8 @@ displayPlayerBaseMenu(player);
 // display map and map buttons
 drawLocationMap(getCurrentLocation(), getMapDepth(), getMapScale());
 setMapButtons();
-
 // draw clock
 drawClock();
-
-var testNpc = new NPC("testman", 10, 5, 5, []);
-//battleScene(player, testNpc);
 
 
 

@@ -1,58 +1,81 @@
-export function battleScene(player, enemy) {
-    console.log("A wild " + enemy.name + " appears!");
-    console.log("Battle Start!");
+import { getPlayer } from "./gameState.js";
 
-    let battleOver = false;
+export class battleScene{
 
-    while (!battleOver) {
-        console.log("Your HP: " + player.health);
-        console.log(enemy.name + " HP: " + enemy.health);
+    //player = getPlayer();
 
-        // Player's turn
-        let action = prompt("Choose your action: (1) Attack (2) Defend (3) Use Item (4) Flee");
+    battleOver;
+    playerWin;
+    player;
+    enemy;
 
-        switch (action) {
-            case "1":
-                let playerDamage = Math.max(0, player.attack - enemy.defense);
-                enemy.health -= playerDamage;
-                console.log("You attack the " + enemy.name + " for " + playerDamage + " damage!");
+    constructor(enemy){
+        this.player = getPlayer();
+        this.enemy = enemy;
+        this.battleOver = false;
+        this.playerWin = true;  // currently assuming that a win when intialized will lead to better result if bugged
+    }
+
+    playTurn(action){
+        // get player action and then check if player wins
+        // effectively gives user the first turn
+        this.playerAction(action);
+        if(enemyDies()){
+            this.playerWin = true;
+            this.isOver = true;
+            return;
+        }
+        // get enemy action and then check if player loses
+        // effectively turn two 
+        this.getEnemyAction();
+        if(playerDies()){
+            this.playerWin = false;
+            this.isOver = true;
+        }
+        return;
+    }
+
+    isOver() {
+        return battleOver;
+    }
+
+    playerAction(action){
+        switch(action){
+            case "attack":
+                this.player.attackEnemy(this.enemy);
                 break;
-            case "2":
-                console.log("You defend, reducing incoming damage!");
+            case "defend":
                 player.defending = true;
                 break;
-            case "3":
-                console.log("You use an item!");
-                // Implement item usage logic
+            case "item":
+                alert("item not implemented yet");
                 break;
-            case "4":
-                console.log("You fled the battle!");
-                return; // Exit the battle
+            case "flee":
+                alert("flee not implemented yet");
+                //return;
+                break;
             default:
-                console.log("Invalid action, try again.");
-                continue;
+                console.log("Invalid battle action");
+                break;
         }
+    }
+    getEnemyAction(){
+        this.enemy.attackEnemy(this.player);
+        return "attack";
+    }
 
-        // Check if enemy is defeated
-        if (enemy.health <= 0) {
-            console.log("You defeated the " + enemy.name + "!");
-            battleOver = true;
-            continue;
+    playerDies(){
+        if (this.player.health <= 0){
+            this.battleOver = true;
+            return true;
         }
-
-        // Enemy's turn
-        console.log("The " + enemy.name + " attacks!");
-        let enemyDamage = Math.max(0, enemy.attack - (player.defending ? player.defense * 2 : player.defense));
-        player.health -= enemyDamage;
-        console.log("The " + enemy.name + " hits you for " + enemyDamage + " damage!");
-
-        // Check if player is defeated
-        if (player.health <= 0) {
-            console.log("You were defeated by the " + enemy.name + "...");
-            battleOver = true;
+        return false;
+    }
+    enemyDies(){
+        if (this.enemy.health <= 0){
+            this.battleOver = true;
+            return true;
         }
-
-        // Reset defense state
-        player.defending = false;
+        return false;
     }
 }

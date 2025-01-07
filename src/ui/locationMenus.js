@@ -1,5 +1,7 @@
 import { travelTo } from "../engine/navigation.js";
 import { getTravelTimeString } from "../utils/timeToTravel.js"
+import { drawBattleScene } from "./drawBattleScene.js";
+import { NPC } from "../entities/npc.js";
 
 export function displayLocationBaseMenu(Location){
 
@@ -30,6 +32,16 @@ export function displayLocationBaseMenu(Location){
         connectionsList.appendChild(lineBreak);
     });
     centerDiv.appendChild(connectionsList);
+
+    // ***********TEMPORARY FOR TESTING***********
+
+    var testBattle = document.createElement("a");
+    testBattle.textContent = "start a test battle";
+    var testNpc = new NPC("testman", 10, 5, 5, []);
+    testBattle.addEventListener("click", () => drawBattleScene(testNpc));
+    centerDiv.appendChild(testBattle);
+
+    // *******************************************
     
     switch(Location.type){
         case("TOWN"):
