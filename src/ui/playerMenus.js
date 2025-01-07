@@ -1,4 +1,4 @@
-export function displayPlayerBaseMenu(player){
+export function drawPlayerBaseMenu(player){
 
     const parent = document.getElementById("playerMenu");
     parent.innerHTML = "";

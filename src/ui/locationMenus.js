@@ -3,7 +3,7 @@ import { getTravelTimeString } from "../utils/timeToTravel.js"
 import { drawBattleScene } from "./drawBattleScene.js";
 import { NPC } from "../entities/npc.js";
 
-export function displayLocationBaseMenu(Location){
+export function drawLocationBaseMenu(Location){
 
     var centerDiv = document.getElementById("center-content");
     centerDiv.innerHTML = "";
@@ -37,7 +37,7 @@ export function displayLocationBaseMenu(Location){
 
     var testBattle = document.createElement("a");
     testBattle.textContent = "start a test battle";
-    var testNpc = new NPC("testman", 10, 5, 5, []);
+    var testNpc = new NPC("testman", 10, 7, 7, []);
     testBattle.addEventListener("click", () => drawBattleScene(testNpc));
     centerDiv.appendChild(testBattle);
 

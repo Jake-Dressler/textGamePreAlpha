@@ -1,9 +1,9 @@
 import { town, forest } from "./src/world/location.js";
 import { generateTowns, saveWorldToFile, createConnections, generateWorld } from "./src/world/worldGen.js"
 //import { gameState } from "./src/engine/gameState.js";
-import { getCurrentLocation, setCurrentLocation, getGameTime, advanceTime, getWorld, setWorld, setMapType, getMapType, getMapDepth, getMapScale } from './src/engine/gameState.js';
-import { displayLocationBaseMenu } from "./src/ui/locationMenus.js";
-import { displayPlayerBaseMenu } from "./src/ui/playerMenus.js";
+import { getCurrentLocation, setCurrentLocation, getGameTime, advanceTime, getWorld, setWorld, setMapType, getMapType, getMapDepth, getMapScale, getPlayer } from './src/engine/gameState.js';
+import { drawLocationBaseMenu } from "./src/ui/locationMenus.js";
+import { drawPlayerBaseMenu } from "./src/ui/playerMenus.js";
 import { drawLocationMap, drawLocationMapSimple, setMapButtons } from "./src/ui/worldMap.js";
 import { Player } from "./src/entities/player.js"
 import { drawClock } from "./src/ui/drawClock.js"
@@ -12,7 +12,7 @@ import { battleScene } from "./src/engine/battleScene.js";
 //import { travelTo } from "./src/engine/navigation.js";
 
 // create player and world
-var player = new Player("test");
+// var player = new Player("test");
 setWorld(generateWorld(20,30));
 setCurrentLocation(getWorld()[0]);
 
@@ -20,9 +20,9 @@ setCurrentLocation(getWorld()[0]);
 // getCurrentLocation().visited = true; 
 
 // display menus
-displayLocationBaseMenu(getCurrentLocation());
-console.log(getCurrentLocation());
-displayPlayerBaseMenu(player);
+drawLocationBaseMenu(getCurrentLocation());
+//console.log(getCurrentLocation());
+drawPlayerBaseMenu(getPlayer());
 
 // display map and map buttons
 drawLocationMap(getCurrentLocation(), getMapDepth(), getMapScale());

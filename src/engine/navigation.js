@@ -1,9 +1,9 @@
 import { getCurrentLocation, setCurrentLocation, getGameTime, advanceTime, getWorld, getMapType, getMapDepth, getMapScale, getPlayerEnergy, useEnergy, getPlayer } from './gameState.js';
-import { displayLocationBaseMenu } from "../ui/locationMenus.js";
+import { drawLocationBaseMenu } from "../ui/locationMenus.js";
 import { drawLocationMap, drawLocationMapSimple } from "../ui/worldMap.js";
 import { updateClock } from '../ui/drawClock.js';
 import { getTimeToTravel } from "../utils/timeToTravel.js";
-import { displayPlayerBaseMenu } from '../ui/playerMenus.js';
+import { drawPlayerBaseMenu } from '../ui/playerMenus.js';
 
 export function travelTo(nextLocation) {
     let currentLocation = getCurrentLocation();
@@ -22,11 +22,11 @@ export function travelTo(nextLocation) {
 
             // update player energy before updating location
             useEnergy(getTravelEnergyUse(currentLocation.connections[nextLocation]));
-            displayPlayerBaseMenu(getPlayer());
+            drawPlayerBaseMenu(getPlayer());
 
             // Update the current location
             setCurrentLocation(nextLocObj);
-            displayLocationBaseMenu(getCurrentLocation());
+            drawLocationBaseMenu(getCurrentLocation());
             let mapView = getMapType();
 
             if (mapView == "simple") drawLocationMapSimple(getCurrentLocation(),  getMapDepth(), getMapScale());

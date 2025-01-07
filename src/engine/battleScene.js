@@ -8,35 +8,39 @@ export class battleScene{
     playerWin;
     player;
     enemy;
+    turnCount;
 
     constructor(enemy){
         this.player = getPlayer();
         this.enemy = enemy;
         this.battleOver = false;
         this.playerWin = true;  // currently assuming that a win when intialized will lead to better result if bugged
+        this.turnCount = 0;
     }
 
     playTurn(action){
         // get player action and then check if player wins
         // effectively gives user the first turn
         this.playerAction(action);
-        if(enemyDies()){
+        this.turnCount += 1;
+        
+        if(this.enemyDies()){
             this.playerWin = true;
-            this.isOver = true;
+            this.battleOver = true;
             return;
         }
         // get enemy action and then check if player loses
         // effectively turn two 
         this.getEnemyAction();
-        if(playerDies()){
+        if(this.playerDies()){
             this.playerWin = false;
-            this.isOver = true;
+            this.battleOver = true;
         }
         return;
     }
 
     isOver() {
-        return battleOver;
+        return this.battleOver;
     }
 
     playerAction(action){
@@ -45,7 +49,7 @@ export class battleScene{
                 this.player.attackEnemy(this.enemy);
                 break;
             case "defend":
-                player.defending = true;
+                this.player.defending = true;
                 break;
             case "item":
                 alert("item not implemented yet");
