@@ -13,7 +13,7 @@ import { battleScene } from "./src/engine/battleScene.js";
 
 // create player and world
 // var player = new Player("test");
-setWorld(generateWorld(20,30));
+setWorld(generateWorld(20,40));
 setCurrentLocation(getWorld()[0]);
 
 // TODO: find a way to set intial to visited

@@ -9,6 +9,9 @@ export class battleScene{
     player;
     enemy;
     turnCount;
+    playerTook;
+    enemyTook;
+    expGain;
 
     constructor(enemy){
         this.player = getPlayer();
@@ -16,6 +19,7 @@ export class battleScene{
         this.battleOver = false;
         this.playerWin = true;  // currently assuming that a win when intialized will lead to better result if bugged
         this.turnCount = 0;
+        this.expGain = 0;
     }
 
     playTurn(action){
@@ -48,7 +52,9 @@ export class battleScene{
     playerAction(action){
         switch(action){
             case "attack":
-                this.player.attackEnemy(this.enemy);
+                let damage = this.player.attackEnemy(this.enemy);
+                this.enemyTook = damage;
+                // return damage;
                 break;
             case "defend":
                 this.player.defending = true;
@@ -66,7 +72,8 @@ export class battleScene{
         }
     }
     getEnemyAction(){
-        this.enemy.attackEnemy(this.player);
+        let damage = this.enemy.attackEnemy(this.player);
+        this.playerTook = damage;
         return "attack";
     }
 
@@ -90,7 +97,9 @@ export class battleScene{
             return;
         }
         if(this.playerWin){
-            this.player.gainExperience(this.getExpGain());
+            let gain = this.getExpGain();
+            this.expGain = gain;
+            this.player.gainExperience(gain);
         }
     }
     getExpGain(){

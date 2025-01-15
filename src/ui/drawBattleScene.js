@@ -9,7 +9,7 @@ export async function drawBattleScene(npc) {
     while (!battle.isOver()) {
         await updateScene(battle);
     }
-    drawPostBattleScene(battle.player.health > 0);
+    drawPostBattleScene(battle);
 }
 
 function updateScene(battle) {
@@ -17,6 +17,9 @@ function updateScene(battle) {
         // Display player and enemy health
         let centerDiv = document.getElementById("center-content");
         centerDiv.innerHTML = "";
+
+        drawLastTurn(centerDiv, battle);
+
         let health = document.createElement("p");
         health.innerHTML = `${battle.player.name} HP: ${battle.player.health}<br>${battle.enemy.name} HP: ${battle.enemy.health}`;
         centerDiv.appendChild(health);
@@ -28,7 +31,7 @@ function updateScene(battle) {
         let flee = document.createElement("a");
 
         // Set text for elements
-        attack.textContent = "Attack";
+        attack.textContent = "Attack"; 
         defend.textContent = "Defend";
         useItem.textContent = "Use an Item";
         flee.textContent = "Flee";
@@ -44,6 +47,11 @@ function updateScene(battle) {
         useItem.addEventListener("click", () => handleAction("item"));
         flee.addEventListener("click", () => handleAction("flee"));
 
+        attack.href = '#';
+        defend.href = '#';
+        useItem.href = '#';
+        flee.href = '#';
+
         // Add links and line breaks to the div
         centerDiv.appendChild(attack);
         centerDiv.appendChild(document.createElement("br"));
@@ -55,14 +63,14 @@ function updateScene(battle) {
     });
 }
 
-function drawPostBattleScene(playerWins) {
+function drawPostBattleScene(battle) {
     let centerDiv = document.getElementById("center-content");
     centerDiv.innerHTML = "";
 
-    let message = document.createElement("p");
+    let message = document.createElement("p"); 
     let link = document.createElement("a");
 
-    if (playerWins) {
+    if (battle.playerWin) {
         message.textContent = "You won the battle";
     } else {
         message.textContent = "You lost the battle";
@@ -74,6 +82,24 @@ function drawPostBattleScene(playerWins) {
         drawLocationBaseMenu(getCurrentLocation())
     });
 
+    if(battle.expGain){
+        let xpGainMessage = document.createElement("p"); 
+        xpGainMessage.textContent = `Player gains ${battle.expGain} experience`;
+        centerDiv.appendChild(xpGainMessage);
+    }
+
     centerDiv.appendChild(message);
     centerDiv.appendChild(link);
+}
+
+function drawLastTurn(div, battle){
+    if(battle.enemyTook || battle.playerTook){
+        let enemyTakes = document.createElement('p');
+        enemyTakes.textContent = `Enemy took: ${battle.enemyTook} damage`;
+        let playerTakes = document.createElement('p');
+        playerTakes.textContent = `Player took: ${battle.playerTook} damage`;
+
+        div.appendChild(playerTakes);
+        div.appendChild(enemyTakes);
+    }
 }

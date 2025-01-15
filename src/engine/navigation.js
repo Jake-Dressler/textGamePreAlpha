@@ -7,7 +7,7 @@ import { drawPlayerBaseMenu } from '../ui/playerMenus.js';
 
 export function travelTo(nextLocation) {
     let currentLocation = getCurrentLocation();
-    if (!currentLocation.connections){ console.log("WARNING: location has no connections"); return;}
+    if (!currentLocation.connections){ console.log("WARNING: location has no connections"); return;} // This should not be possible unless delaunay fails
     //if (getPlayerEnergy() < COSTofTRAVEL){};   ADD ENERGY CHECK LATER
     if (Object.keys(currentLocation.connections).includes(nextLocation)) {
         // Find the next location object in the towns array

@@ -23,22 +23,22 @@ export class NPC {
     takeDamage(amount) {
         const damage = Math.max(amount - this.defense, 0);
         this.health -= damage;
-        console.log(`${this.name} takes ${damage} damage!`);
+        // console.log(`${this.name} takes ${damage} damage!`);
         if (this.health <= 0) {
             this.health = 0;
             console.log(`${this.name} has been defeated!`);
         }
+        return damage;
     }
 
     // Handles attacking a Player or another entity
     attackEnemy(enemy) {
         if (!enemy || typeof enemy.takeDamage !== 'function') {
-            console.log(`${this.name} tries to attack, but there's no valid target!`);
+            // console.log(`${this.name} tries to attack, but there's no valid target!`);
             return;
         }
-
-        console.log(`${this.name} attacks ${enemy.name}!`);
-        enemy.takeDamage(this.attack);
+        // console.log(`${this.name} attacks ${enemy.name}!`);
+        return enemy.takeDamage(this.attack);
     }
 
     // Interacts with the player (e.g., speaks a line of dialog)

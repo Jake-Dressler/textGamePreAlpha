@@ -60,17 +60,18 @@ export class Player {
         if (this.health <= 0) {
             this.health = 0;
         }
+        return damage;
     }
 
     // Handles attacking an enemy
     attackEnemy(enemy) {
-        console.log(`${this.name} attacks ${enemy.name}!`);
-        enemy.takeDamage(this.attack);
+        // console.log(`${this.name} attacks ${enemy.name}!`);
+        return enemy.takeDamage(this.attack);
     }
 
     // Gain experience and check for level-ups
     gainExperience(amount) {
-        console.log(`${this.name} gains ${amount} experience points!`);
+        // console.log(`${this.name} gains ${amount} experience points!`);
         this.experience += amount;
         if (this.experience >= this.experienceToLevelUp) {
             this.levelUp();
