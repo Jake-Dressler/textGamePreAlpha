@@ -47,6 +47,9 @@ export function drawLocationBaseMenu(Location){
         case("TOWN"):
             break;
         case("FOREST"):
+
+            
+
             break;
         default:
             console.log("ERROR: invalid Location type");
