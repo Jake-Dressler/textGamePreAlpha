@@ -10,6 +10,7 @@ import { drawClock } from "./src/ui/drawClock.js"
 import { NPC } from "./src/entities/npc.js"
 import { battleScene } from "./src/engine/battleScene.js";
 import { Metal } from './src/entities/metal.js'
+import { Item, Tool } from './src/entities/item.js'
 //import { travelTo } from "./src/engine/navigation.js";
 
 // create player and world
@@ -31,7 +32,12 @@ setMapButtons();
 // draw clock
 drawClock();
 
-
+var testMetal = new Metal();
+console.log(testMetal);
+// var testItem = new Item();
+// console.log(testItem);
+var testTool = new Tool(testMetal, 'axe', null);
+console.log(testTool);
 
 
 

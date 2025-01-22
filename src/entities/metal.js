@@ -1,15 +1,17 @@
-import { gaussianRandom } from "../utils/gaussianRandom";
+import { gaussianRandom } from "../utils/gaussianRandom.js";
 import MarkovGenerator from "../utils/markovGenerator.js";
 import elements from '../utils/elements.json' with { type: 'json' };
 
-class metal{
+export class Metal{
 
     name;
     density;
     efficiency;
 
     constructor(){
-
+        this.name = this.generateName();
+        this.density = this.generateDensity();
+        this.efficiency = this.generateEfficiency();
     }
 
     generateName(){
@@ -26,5 +28,4 @@ class metal{
     generateEfficiency(){
         return Math.random();
     }
-
 }
