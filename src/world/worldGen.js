@@ -1,18 +1,14 @@
 import { town, forest } from "./location.js"
-//const { Delaunay } = require("d3-delaunay");
 import { Delaunay } from "https://cdn.jsdelivr.net/npm/d3@7/+esm"
-// TODO: remove exports for everything except generate world
 
 // generate the world by creating locations and then connections
 export function generateWorld(numTowns, numForests){
     let world = []
     generateTowns(numTowns).forEach(t => world.push(t));
     generateForests(numForests).forEach(f => world.push(f));
-    //console.log(world);
     world = createConnections(world);
     return world;
 }
-
 //creates a specified number of towns using generateTown(location.js) method 
 export function generateTowns(numTowns){
     const towns = [];
@@ -33,7 +29,6 @@ export function generateForests(numForests){
     }
     return forests;
 }
-
 // TODO: add other location types
 // TODO: change for seeded random
 // create connections between loactions

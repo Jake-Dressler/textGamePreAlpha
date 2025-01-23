@@ -1,7 +1,7 @@
 import { town, forest } from "./src/world/location.js";
 import { generateTowns, saveWorldToFile, createConnections, generateWorld } from "./src/world/worldGen.js"
 //import { gameState } from "./src/engine/gameState.js";
-import { getCurrentLocation, setCurrentLocation, getGameTime, advanceTime, getWorld, setWorld, setMapType, getMapType, getMapDepth, getMapScale, getPlayer } from './src/engine/gameState.js';
+import { getCurrentLocation, setCurrentLocation, getGameTime, advanceTime, getWorld, setWorld, setMapType, getMapType, getMapDepth, getMapScale, getPlayer, generateMetalList } from './src/engine/gameState.js';
 import { drawLocationBaseMenu } from "./src/ui/locationMenus.js";
 import { drawPlayerBaseMenu } from "./src/ui/playerMenus.js";
 import { drawLocationMap, drawLocationMapSimple, setMapButtons } from "./src/ui/worldMap.js";
@@ -15,6 +15,7 @@ import { Metal } from './src/entities/metal.js'
 // create player and world
 // var player = new Player("test");
 setWorld(generateWorld(20,40));
+generateMetalList(10);
 setCurrentLocation(getWorld()[0]);
 
 // TODO: find a way to set intial to visited
