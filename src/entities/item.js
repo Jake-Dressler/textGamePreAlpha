@@ -6,6 +6,7 @@ export class Item {
     price;
     weight;
     rarity;
+    canEquip;
 
     constructor(){
         this.name = '';
@@ -14,9 +15,13 @@ export class Item {
         this.price = 0;
         this.weight = 0;
         this.rarity = 'common';
+        this.canEquip = false;
     }
     setRarity(rarity){
         this.rarity = rarity;
+    }
+    applyEffects(){
+        if (this.effect == null) return;
     }
 }
 
@@ -25,12 +30,15 @@ export class Tool extends Item{
     material;
     toolType;
     toolEfficiency;
+    slot;
 
     constructor(material, toolType, effect){
         super();
         this.effect = effect;
         this.material = material;
         this.toolType = toolType;
+        this.canEquip = true;
+        this.slot = weapon;
         this.name = this.getName(toolType, material.name);
         this.weight = this.getWeight(material.density);
         this.toolEfficiency = this.getEfficiency(material.efficiency);

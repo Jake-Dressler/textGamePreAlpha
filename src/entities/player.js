@@ -13,6 +13,13 @@ export class Player {
         this.level = 1; // Player's level
         this.experience = 0; // Experience points
         this.experienceToLevelUp = 100; // Experience needed to level up
+
+        // Tracks equipped items for specific slots
+        this.equippedItems = {
+            weapon: null,
+            armor: null,
+            accessory: null,
+        };
     }
 
     // Displays player's current stats
@@ -50,6 +57,34 @@ export class Player {
             this.inventory.splice(itemIndex, 1);
         } else {
             console.log(`You don't have a ${itemName} in your inventory.`);
+        }
+    }
+
+    equip(item) {
+        if (!item.canEquip){
+            alert(`${item.name} cannot be equipped`);
+            return false;
+        }
+        if (!this.equippedItems.hasOwnProperty(item.slot)) {
+            alert(`${slot} is not a valid slot.`);
+            return false;
+        }
+        this.equippedItems[slot] = item;
+        console.log(`${item.name} equipped in ${slot} slot.`);
+        item.applyEffects(this);
+        return true;
+    }
+
+    unequip(slot) {
+        if (this.equippedItems[slot]) {
+            const item = this.equippedItems[slot];
+            item.removeEffects(this); // Remove item effects
+            this.equippedItems[slot] = null;
+            console.log(`${item.name} unequipped from ${slot} slot.`);
+            return true;
+        } else {
+            console.log(`No item equipped in ${slot} slot.`);
+            return false;
         }
     }
 
