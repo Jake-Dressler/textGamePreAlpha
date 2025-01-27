@@ -105,9 +105,9 @@ export function drawLocationMapSimple(currentLocation, depth, scale = 1) {
     function drawConnections(location, x, y, level, angleStart = 0, angleRange = 2 * Math.PI) {
         if (level > depth || !location.connections) return;
 
-        const angleStep = angleRange / location.connections.length;
+        const angleStep = angleRange / Object.keys(location.connections).length;
 
-        location.connections.forEach((connectionName, index) => {
+        Object.keys(location.connections).forEach((connectionName, index) => {
             const angle = angleStart + index * angleStep;
             const childX = x + connectionRadius * Math.cos(angle);
             const childY = y + connectionRadius * Math.sin(angle);

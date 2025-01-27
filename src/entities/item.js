@@ -38,7 +38,7 @@ export class Tool extends Item{
         this.material = material;
         this.toolType = toolType;
         this.canEquip = true;
-        this.slot = weapon;
+        this.slot = 'weapon';
         this.name = this.getName(toolType, material.name);
         this.weight = this.getWeight(material.density);
         this.toolEfficiency = this.getEfficiency(material.efficiency);

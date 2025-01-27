@@ -35,6 +35,7 @@ export class Player {
 
     gainEnergy(amount){
         this.energy += amount;
+        if (this.energy > this.maxEnergy) this.energy = this.maxEnergy;
     }
     useEnergy(amount){
         this.energy -= amount;
