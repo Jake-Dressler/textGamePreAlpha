@@ -42,6 +42,16 @@ export class Player {
         if (this.energy < 0) this.energy = 0;
     }
 
+    hasAxe(){
+        if (!this.inventory) return false;
+        for (var i of this.inventory){
+            console.log(i);
+            // if (i instanceof Tool && i.toolType == "axe") return true;
+            if (i.toolType == "axe") return true;
+        }
+        return false;
+    }
+
     // Adds an item to the player's inventory
     addItem(item) {
         this.inventory.push(item);

@@ -19,6 +19,10 @@ setWorld(generateWorld(20,40));
 setCurrentLocation(getWorld()[0]);
 // generate the world's metals
 generateMetalList(10);
+//console.log(getMetalList());
+let testAxe = new Tool(getMetalList()[0], "axe", null);
+//getPlayer().addItem(testAxe);
+console.log(getPlayer().hasAxe());
 
 // TODO: find a way to set intial to visited
 // getCurrentLocation().visited = true; 
