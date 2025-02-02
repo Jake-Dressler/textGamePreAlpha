@@ -1,0 +1,12 @@
+[
+    {
+        "name": "log",
+        "description": "A log cut from a tree",
+        "effect": null,
+        "price": 10,
+        "weight": 15,
+        "rarity": "common",
+        "canEquip": false
+    }
+
+]

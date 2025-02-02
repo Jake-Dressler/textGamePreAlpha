@@ -45,7 +45,7 @@ export class Player {
     hasAxe(){
         if (!this.inventory) return false;
         for (var i of this.inventory){
-            console.log(i);
+            //console.log(i);
             // if (i instanceof Tool && i.toolType == "axe") return true;
             if (i.toolType == "axe") return true;
         }

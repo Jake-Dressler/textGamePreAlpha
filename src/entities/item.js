@@ -23,6 +23,22 @@ export class Item {
     applyEffects(){
         if (this.effect == null) return;
     }
+    toObject() {
+        return {
+            [this.name]:{
+                name: this.name,
+                description: this.description,
+                effect: this.effect,
+                price: this.price,
+                weight: this.weight,
+                rarity: this.rarity,
+                canEquip: this.canEquip
+            }
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
 }
 
 export class Tool extends Item{
@@ -56,6 +72,25 @@ export class Tool extends Item{
     //TODO: make this do something at some point
     getPrice(){
         return 30;
+    }
+    toObject() {
+        return {
+            [this.name]:{
+                name: this.name,
+                health: this.health,
+                maxHealth: this.maxHealth,
+                attack: this.attack,
+                defense: this.defense,
+                inventory: this.inventory,
+                gold: this.gold,
+                level: this.level,
+                experience: this.experience,
+                experienceToLevelUp: this.experienceToLevelUp
+            }
+        };
+    }
+    toJSON() {
+        return this.toObject
     }
 }
 

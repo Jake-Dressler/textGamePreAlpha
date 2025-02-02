@@ -1,7 +1,7 @@
 import { town, forest } from "./src/world/location.js";
 import { generateTowns, saveWorldToFile, createConnections, generateWorld } from "./src/world/worldGen.js"
 //import { gameState } from "./src/engine/gameState.js";
-import { getCurrentLocation, setCurrentLocation, getGameTime, advanceTime, getWorld, setWorld, setMapType, getMapType, getMapDepth, getMapScale, getPlayer, generateMetalList, getMetalList } from './src/engine/gameState.js';
+import { getCurrentLocation, setCurrentLocation, getGameTime, advanceTime, getWorld, setWorld, setMapType, getMapType, getMapDepth, getMapScale, getPlayer, generateMetalList, getMetalList, getItemList } from './src/engine/gameState.js';
 import { drawLocationBaseMenu } from "./src/ui/locationMenus.js";
 import { drawPlayerBaseMenu } from "./src/ui/playerMenus.js";
 import { drawLocationMap, drawLocationMapSimple, setMapButtons } from "./src/ui/worldMap.js";
@@ -19,10 +19,11 @@ setWorld(generateWorld(20,40));
 setCurrentLocation(getWorld()[0]);
 // generate the world's metals
 generateMetalList(10);
+
+
 //console.log(getMetalList());
-let testAxe = new Tool(getMetalList()[0], "axe", null);
-//getPlayer().addItem(testAxe);
-console.log(getPlayer().hasAxe());
+// let testAxe = new Tool(getMetalList()[0], "axe", null);
+// getPlayer().addItem(testAxe);
 
 // TODO: find a way to set intial to visited
 // getCurrentLocation().visited = true; 
@@ -40,6 +41,12 @@ setMapButtons();
 // draw clock
 drawClock();
 
+// var testLog = new Item();
+// testLog.name = "log";
+// testLog.description = "A log cut from a tree";
+// testLog.price = 10;
+// testLog.weight = 15;
+// console.log(testLog.toObject());
 
 
 

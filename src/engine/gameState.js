@@ -2,16 +2,18 @@
 import { Clock } from './clock.js';
 import { Player } from '../entities/player.js'
 import { Metal } from '../entities/metal.js';
+import items from '../entities/itemList.json' with { type: 'json' };
 
 // Initialize the clock (you can set an initial time if needed)
 const clock = new Clock();
 const player = new Player("testPlayer");
 
 // Store the current location
-let currentLocation = null;
+var currentLocation = null;
 // Store world and materials
-let world = null;
-let metalList = [];
+var world = null;
+var metalList = [];
+var itemList = items;
 
 // **************************WORLD FUNCTIONS*******************************
 export function setWorld(w){
@@ -57,6 +59,9 @@ export function generateMetalList(numMetals){
 }
 export function getMetalList(){
     return metalList;
+}
+export function getItemList(){
+    return itemList;
 }
 // ************************************************************************
 
