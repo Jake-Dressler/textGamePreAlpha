@@ -22,8 +22,8 @@ generateMetalList(10);
 
 
 //console.log(getMetalList());
-// let testAxe = new Tool(getMetalList()[0], "axe", null);
-// getPlayer().addItem(testAxe);
+let testAxe = new Tool(getMetalList()[0], "axe", null);
+getPlayer().addItem(testAxe);
 
 // TODO: find a way to set intial to visited
 // getCurrentLocation().visited = true; 

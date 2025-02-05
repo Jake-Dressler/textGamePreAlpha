@@ -2,6 +2,9 @@ import { travelTo } from "../engine/navigation.js";
 import { getTravelTimeString } from "../utils/timeToTravel.js"
 import { drawBattleScene } from "./drawBattleScene.js";
 import { NPC } from "../entities/npc.js";
+import { chopTree } from "../utils/forestUtils.js";
+import { getCurrentLocation, getPlayer } from "../engine/gameState.js";
+import { drawPlayerBaseMenu } from "./playerMenus.js";
 
 export function drawLocationBaseMenu(Location){
 
@@ -48,6 +51,19 @@ export function drawLocationBaseMenu(Location){
             break;
         case("FOREST"):
 
+            let lineBreak = document.createElement("br");
+            centerDiv.appendChild(lineBreak);
+
+            let chop = document.createElement("a");
+            chop.href = "#"; // Or use a proper routing system
+            chop.textContent = "Chop down a tree";
+            chop.addEventListener("click", () => {
+                chopTree(getPlayer(), getCurrentLocation());
+                drawPlayerBaseMenu(getPlayer());
+            });
+            centerDiv.appendChild(chop); 
+
+            centerDiv.appendChild(lineBreak);
             
 
             break;

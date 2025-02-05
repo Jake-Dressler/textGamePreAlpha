@@ -1,3 +1,6 @@
+import { getCurrentLocation, getPlayer } from "../engine/gameState.js";
+import { drawLocationBaseMenu } from "./locationMenus.js";
+
 export function drawPlayerBaseMenu(player){
 
     const parent = document.getElementById("playerMenu");
@@ -25,4 +28,35 @@ export function drawPlayerBaseMenu(player){
     parent.appendChild(playerGold);
     parent.appendChild(playerLevel);
     parent.appendChild(playerEnergy);
+
+    const inv = document.createElement("a");
+    inv.href = "#"; // Or use a proper routing system
+    inv.textContent = "Open inventory";
+    inv.addEventListener("click", () => drawInventory());
+    parent.appendChild(inv);    
+}
+
+function drawInventory(){
+
+    if(!getPlayer().inventory){
+        alert("inventory empty");
+        return;
+    }
+
+    // console.log(getPlayer().inventory);
+
+    let centerDiv = document.getElementById("center-content");
+    centerDiv.innerHTML = "";
+
+    let inv = document.createElement("a");
+    inv.href = "#";
+    inv.textContent = "Exit inventory";
+    inv.addEventListener("click", () => drawLocationBaseMenu(getCurrentLocation()));
+    centerDiv.appendChild(inv); 
+
+    getPlayer().inventory.forEach(item => {
+        let i = document.createElement("p");
+        i.textContent = item.name;
+        centerDiv.appendChild(i);
+    });
 }

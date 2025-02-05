@@ -1,10 +1,14 @@
-import { Player } from "../entities/player";
-import { forest } from "../world/location";
-import { getCurrentLocation, getItemList, useEnergy } from "../engine/gameState";
+import { Player } from "../entities/player.js";
+import { forest } from "../world/location.js";
+import { getCurrentLocation, getItemList, getPlayer, useEnergy } from "../engine/gameState.js";
 
 
 export function chopTree(player, location){
-    if(location.type != "forest") return false;
+
+    // let player = getPlayer();
+    // let location = getCurrentLocation();
+
+    if(location.type != "FOREST") return false;
     if(!player.hasAxe()) return false;
     if(!player.useEnergy(getTreeChopEnergy())) return false;
 

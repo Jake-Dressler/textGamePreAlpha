@@ -38,8 +38,13 @@ export class Player {
         if (this.energy > this.maxEnergy) this.energy = this.maxEnergy;
     }
     useEnergy(amount){
+        let previousE = this.energy;
         this.energy -= amount;
-        if (this.energy < 0) this.energy = 0;
+        if (this.energy < 0){
+            this.energy = previousE;
+            return false;
+        } 
+        return true;
     }
 
     hasAxe(){
