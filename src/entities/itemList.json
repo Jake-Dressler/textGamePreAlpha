@@ -1,5 +1,6 @@
-[
-    {
+
+{ 
+    "log": {
         "name": "log",
         "description": "A log cut from a tree",
         "effect": null,
@@ -8,5 +9,4 @@
         "rarity": "common",
         "canEquip": false
     }
-
-]
+}

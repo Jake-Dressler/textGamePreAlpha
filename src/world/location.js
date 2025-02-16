@@ -2,6 +2,7 @@ import MarkovGenerator from "../utils/markovGenerator.js";
 import places from '../utils/places.json' with { type: 'json' };
 import names from '../utils/names.json' with { type: 'json' };
 import animals from '../utils/animals.json' with { type: 'json' };
+import { Building, Shop } from "../entities/building.js"; 
 
 class Location {
     name;
@@ -47,18 +48,23 @@ class Location {
 export class town extends Location{
     townSize;
     numBuildings;
+    buildings;
     population;
 
     constructor(){
         super();
         this.type = "TOWN";
         this.townSize = "UNDEFINED";
+        this.buildings = [];
         this.numBuildings = 0;
         this.population = 0;
+        this.buildings = this.generateBuildings();
     }
     generateTown(){
         this.type = "TOWN";
-        this.numBuildings = this.generateNumBuildings();
+        //this.numBuildings = this.generateNumBuildings();
+        this.numBuildings = 1;
+        this.buildings = this.generateBuildings();
         this.population = this.calculatePopulation(this.numBuildings);
         this.townSize = this.calculateSize(this.population);
         this.name = this.generateTownName();
@@ -67,6 +73,13 @@ export class town extends Location{
     }
     generateNumBuildings(){
         return getRandomInt(3, 110);
+    }
+    generateBuildings(){
+        let buildingList = []
+        for(let i = 0; i < this.numBuildings; i++){
+            buildingList.push(new Shop("testShop"));
+        }
+        return buildingList;
     }
     calculatePopulation(numBuildings){
         var n = numBuildings * 2;

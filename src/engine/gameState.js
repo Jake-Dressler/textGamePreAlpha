@@ -13,7 +13,7 @@ var currentLocation = null;
 // Store world and materials
 var world = null;
 var metalList = [];
-var itemList = items;
+const itemList = items;
 
 // **************************WORLD FUNCTIONS*******************************
 export function setWorld(w){

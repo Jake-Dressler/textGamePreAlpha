@@ -32,6 +32,8 @@ getPlayer().addItem(testAxe);
 
 // display menus
 drawLocationBaseMenu(getCurrentLocation());
+console.log(getCurrentLocation());
+
 //console.log(getCurrentLocation());
 drawPlayerBaseMenu(getPlayer());
 

@@ -12,7 +12,7 @@ export function chopTree(player, location){
     if(!player.hasAxe()) return false;
     if(!player.useEnergy(getTreeChopEnergy())) return false;
 
-    let log = getItemList().find(item => item.name == "log");
+    let log = getItemList()['log'];
     for (let i = 0; i < getNumLogs(location); i++){
         player.addItem(log);
     }
