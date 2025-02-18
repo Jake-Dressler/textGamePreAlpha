@@ -1,5 +1,5 @@
 import { getCurrentLocation } from "../engine/gameState.js";
-import { sellToShop } from "../utils/shopUtils.js";
+import { buyFromShop, sellToShop } from "../utils/shopUtils.js";
 import { drawLocationBaseMenu } from "./locationMenus.js";
 import { getPlayer } from "../engine/gameState.js";
 import { drawPlayerBaseMenu } from "./playerMenus.js";
@@ -71,12 +71,26 @@ function drawBuyMenu(shop){
 
     var centerDiv = document.getElementById("center-content");
     centerDiv.innerHTML = "";
-    
+
     let back = document.createElement("a");
     back.href = "#";
     back.textContent = "Back";
     back.addEventListener("click", () => drawShopMenu(shop));
     centerDiv.appendChild(back);
+    centerDiv.appendChild(document.createElement("br"));
+
+    shop.items.forEach((item, index) => {
+        let i = document.createElement("a");
+            i.href = "#";
+            i.textContent = item.name;
+            i.addEventListener("click", () => {
+                buyFromShop(shop, index);
+                drawBuyMenu(shop);
+                drawPlayerBaseMenu(getPlayer());
+            })
+            centerDiv.appendChild(i);
+            centerDiv.appendChild(document.createElement("br"));
+    });
 
 }
 

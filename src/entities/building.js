@@ -35,10 +35,11 @@ export class Shop extends Building{
     getShopItems(){
         let itemList = [];
         let items = getItemList();
-        let numItems = Math.floor(gaussianRandom(10, 3));
+        let itemKeys = Object.keys(items);
+        let numItems = Math.floor(gaussianRandom(8, 5));
         for (let i = 0; i < numItems; i++){
-            let index = Math.floor(Math.random() * items.length)
-            itemList.push(items[index]);
+            let index = Math.floor(Math.random() * itemKeys.length)
+            itemList.push(items[itemKeys[index]]);
         }
         return itemList;
     }
