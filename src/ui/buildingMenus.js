@@ -3,10 +3,9 @@ import { buyFromShop, sellToShop } from "../utils/shopUtils.js";
 import { drawLocationBaseMenu } from "./locationMenus.js";
 import { getPlayer } from "../engine/gameState.js";
 import { drawPlayerBaseMenu } from "./playerMenus.js";
+import { innRest, rentRoom } from "../utils/InnUtils.js";
 
 export function drawBuildingBaseMenu(Building){
-
-    console.log(Building);
 
     var centerDiv = document.getElementById("center-content");
     centerDiv.innerHTML = "";
@@ -26,6 +25,9 @@ export function drawBuildingBaseMenu(Building){
     switch(Building.type){
         case("SHOP"):
             drawShopMenu(Building)
+            break;
+        case("INN"):
+            drawInnMenu(Building);
             break;
         default:
             console.log("invalid building type");
@@ -67,6 +69,42 @@ function drawShopMenu(shop){
 
 }
 
+function drawInnMenu(inn){
+
+    var centerDiv = document.getElementById("center-content");
+    centerDiv.innerHTML = "";
+
+    let exit = document.createElement("a");
+    exit.href = "#";
+    exit.textContent = "Exit the inn";
+    exit.addEventListener("click", () => drawLocationBaseMenu(getCurrentLocation()));
+    centerDiv.appendChild(exit);
+
+    let innName = document.createElement("p");
+    innName.textContent = inn.name;
+    centerDiv.appendChild(innName);
+
+    if(inn.isRented){
+        let room = document.createElement("a");
+        room.href = "#";
+        room.textContent = "Enter rented room";
+        room.addEventListener("click", () => drawRoomMenu(inn));
+        centerDiv.appendChild(room);
+    }
+    else{
+        let rent = document.createElement("a");
+        rent.href = "#";
+        rent.textContent = `Rent a room (${inn.roomPrice}g)`
+        rent.addEventListener("click", () => {
+            rentRoom(inn);
+            drawInnMenu(inn);
+            drawPlayerBaseMenu(getPlayer());
+        })
+        centerDiv.appendChild(rent);
+    }
+
+}
+
 function drawBuyMenu(shop){
 
     var centerDiv = document.getElementById("center-content");
@@ -82,7 +120,7 @@ function drawBuyMenu(shop){
     shop.items.forEach((item, index) => {
         let i = document.createElement("a");
             i.href = "#";
-            i.textContent = item.name;
+            i.textContent = `${item.name} (${item.price}g)`;
             i.addEventListener("click", () => {
                 buyFromShop(shop, index);
                 drawBuyMenu(shop);
@@ -109,7 +147,7 @@ function drawSellMenu(shop){
     getPlayer().inventory.forEach((item, index) => {
             let i = document.createElement("a");
             i.href = "#";
-            i.textContent = item.name;
+            i.textContent = `${item.name} (${item.price}g)`;
             i.addEventListener("click", () => {
                 sellToShop(shop, index);
                 drawSellMenu(shop);
@@ -118,5 +156,28 @@ function drawSellMenu(shop){
             centerDiv.appendChild(i);
             centerDiv.appendChild(document.createElement("br"));
         });
+
+}
+
+function drawRoomMenu(inn){
+
+    var centerDiv = document.getElementById("center-content");
+    centerDiv.innerHTML = "";
+
+    let back = document.createElement("a");
+    back.href = "#";
+    back.textContent = "Back";
+    back.addEventListener("click", () => drawInnMenu(inn));
+    centerDiv.appendChild(back);
+    centerDiv.appendChild(document.createElement("br"));
+
+    for(let i = 1; i < 9; i++){
+        let rest = document.createElement("a");
+        rest.href = "#";
+        rest.textContent = `Sleep ${i}:00`;
+        rest.addEventListener("click", () => innRest(inn, i));
+        centerDiv.appendChild(rest);
+        centerDiv.appendChild(document.createElement("br"));
+    }
 
 }

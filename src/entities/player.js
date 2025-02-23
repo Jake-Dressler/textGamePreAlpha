@@ -13,6 +13,7 @@ export class Player {
         this.level = 1; // Player's level
         this.experience = 0; // Experience points
         this.experienceToLevelUp = 100; // Experience needed to level up
+        this.restRate = 10;
 
         // Tracks equipped items for specific slots
         this.equippedItems = {

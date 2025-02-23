@@ -2,7 +2,7 @@ import MarkovGenerator from "../utils/markovGenerator.js";
 import places from '../utils/places.json' with { type: 'json' };
 import names from '../utils/names.json' with { type: 'json' };
 import animals from '../utils/animals.json' with { type: 'json' };
-import { Building, Shop } from "../entities/building.js"; 
+import { Building, Shop, Inn } from "../entities/building.js"; 
 
 class Location {
     name;
@@ -78,6 +78,7 @@ export class town extends Location{
         let buildingList = []
         for(let i = 0; i < this.numBuildings; i++){
             buildingList.push(new Shop("testShop"));
+            buildingList.push(new Inn("testInn"));
         }
         return buildingList;
     }
