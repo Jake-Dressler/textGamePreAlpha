@@ -2,7 +2,7 @@ import { travelTo } from "../engine/navigation.js";
 import { getTravelTimeString } from "../utils/timeToTravel.js"
 import { drawBattleScene } from "./drawBattleScene.js";
 import { NPC } from "../entities/npc.js";
-import { chopTree } from "../utils/forestUtils.js";
+import { chopTree, forestRest } from "../utils/forestUtils.js";
 import { getCurrentLocation, getPlayer } from "../engine/gameState.js";
 import { drawPlayerBaseMenu } from "./playerMenus.js";
 import { drawBuildingBaseMenu } from "./buildingMenus.js";
@@ -61,8 +61,6 @@ export function drawLocationBaseMenu(Location){
                 connectionsList.appendChild(lineBreak);
             });
 
-
-
             break;
         case("FOREST"):
 
@@ -79,10 +77,36 @@ export function drawLocationBaseMenu(Location){
             centerDiv.appendChild(chop); 
 
             centerDiv.appendChild(lineBreak);
-            
 
+            let rest = document.createElement("a");
+            rest.href = "#";
+            rest.textContent = "take a rest";
+            rest.addEventListener( "click", () => drawForestRestMenus(Location));
+            centerDiv.appendChild(rest);
+            
             break;
         default:
             console.log("ERROR: invalid Location type");
     }
+}
+
+function drawForestRestMenus(forest){
+
+    var centerDiv = document.getElementById("center-content");
+    centerDiv.innerHTML = "";
+
+    let back = document.createElement("a");
+    back.href = "#";
+    back.textContent = "Back";
+    back.addEventListener("click", () => drawLocationBaseMenu(forest));
+    centerDiv.appendChild(back);
+
+    for(let i = 1; i < 9; i++){
+            let rest = document.createElement("a");
+            rest.href = "#";
+            rest.textContent = `Rest ${i}:00`;
+            rest.addEventListener("click", () => forestRest(i));
+            centerDiv.appendChild(rest);
+            centerDiv.appendChild(document.createElement("br"));
+        }
 }

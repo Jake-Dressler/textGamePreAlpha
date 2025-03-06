@@ -23,7 +23,10 @@ generateMetalList(10);
 
 //console.log(getMetalList());
 let testAxe = new Tool(getMetalList()[0], "axe", null);
+let testPick = new Tool(getMetalList()[0], "pick", null)
 getPlayer().addItem(testAxe);
+getPlayer().addItem(testPick);
+console.log(getPlayer().inventory);
 
 // TODO: find a way to set intial to visited
 // getCurrentLocation().visited = true; 

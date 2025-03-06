@@ -209,6 +209,21 @@ export class forest extends Location{
     };
 }
 
+export class mountain extends Location{
+
+    constructor(){
+        super();
+        this.type = "MOUNTAIN";
+        this.density = 0.0;
+        this.avgTreeHeight = 0.0;
+    }
+
+
+
+
+
+}
+
 function getRandomInt(min, max) {
     const minCeiled = Math.ceil(min);
     const maxFloored = Math.floor(max);

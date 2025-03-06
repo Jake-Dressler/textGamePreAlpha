@@ -77,15 +77,16 @@ export class Tool extends Item{
         return {
             [this.name]:{
                 name: this.name,
-                health: this.health,
-                maxHealth: this.maxHealth,
-                attack: this.attack,
-                defense: this.defense,
-                inventory: this.inventory,
-                gold: this.gold,
-                level: this.level,
-                experience: this.experience,
-                experienceToLevelUp: this.experienceToLevelUp
+                description: this.description,
+                effect: this.effect,
+                price: this.price,
+                weight: this.weight,
+                rarity: this.rarity,
+                canEquip: this.canEquip,
+                material: this.material,
+                toolType: this.toolType,
+                slot: this.slot,
+                toolEfficiency: this.toolEfficiency
             }
         };
     }
