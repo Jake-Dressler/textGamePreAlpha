@@ -15,7 +15,7 @@ import { Item, Tool } from './src/entities/item.js'
 
 // create player and world
 // var player = new Player("test");
-setWorld(generateWorld(20,40));
+setWorld(generateWorld(10,10,10));
 setCurrentLocation(getWorld()[0]);
 // generate the world's metals
 generateMetalList(10);

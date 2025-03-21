@@ -1,11 +1,12 @@
-import { town, forest } from "./location.js"
+import { town, forest, mountain } from "./location.js"
 import { Delaunay } from "https://cdn.jsdelivr.net/npm/d3@7/+esm"
 
 // generate the world by creating locations and then connections
-export function generateWorld(numTowns, numForests){
+export function generateWorld(numTowns, numForests, numMountains){
     let world = []
     generateTowns(numTowns).forEach(t => world.push(t));
     generateForests(numForests).forEach(f => world.push(f));
+    generateMountains(numMountains).forEach(m => world.push(m));
     world = createConnections(world);
     return world;
 }
@@ -28,6 +29,16 @@ export function generateForests(numForests){
         forests.push(current);
     }
     return forests;
+}
+//creates a specified number of mountains using generateTown(location.js) method 
+export function generateMountains(numMountains){
+    const mountains = [];
+    for (let i = 0; i < numMountains; i++) {
+        let current = new mountain();
+        current.generateMountain();
+        mountains.push(current);
+    }
+    return mountains;
 }
 // TODO: add other location types
 // TODO: change for seeded random

@@ -85,6 +85,11 @@ export function drawLocationBaseMenu(Location){
             centerDiv.appendChild(rest);
             
             break;
+        case("MOUNTAIN"):
+
+            console.log(Location);
+
+            break;
         default:
             console.log("ERROR: invalid Location type");
     }

@@ -97,7 +97,13 @@ export class Tool extends Item{
 
 export class Ore extends Item{
 
-    constructor(name, description, effect, price, weight){
-        super(name, description, effect, price, weight)
+    constructor(metal){
+        super();
+        this.name = this.getName(metal.name);
+        this.material = metal;
+        this.price = 40;
+    }
+    getName(metalName){
+        return `${metalName} ore`
     }
 }

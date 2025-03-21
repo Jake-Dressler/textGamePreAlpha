@@ -3,6 +3,7 @@ import places from '../utils/places.json' with { type: 'json' };
 import names from '../utils/names.json' with { type: 'json' };
 import animals from '../utils/animals.json' with { type: 'json' };
 import { Building, Shop, Inn } from "../entities/building.js"; 
+import { Cave } from "./subLocation.js";
 
 class Location {
     name;
@@ -211,21 +212,43 @@ export class forest extends Location{
 
 export class mountain extends Location{
 
+    apexHeight;
+
     constructor(){
         super();
         this.type = "MOUNTAIN";
-        this.density = 0.0;
-        this.avgTreeHeight = 0.0;
+        this.caves = [];
+        this.apexHeight = 0;
     }
 
+    generateMountain() {
+        this.name = this.generateMountainName();
+        this.caves = this.generateCaves();
+        this.apexHeight = getRandomInt(10, 50);
+    }
+    generateMountainName(){
+        var w1 = ["Black", "White"]
+        var w2 = ["Ridge", "Mountain", "Hills"]
+        var iWord1 = getRandomInt(0, w1.length);
+        var iWord2 = getRandomInt(0, w2.length);
 
-
-
+        return `${w1[iWord1]} ${w2[iWord2]}`;
+    }
+    generateCaves(){
+        // let n = getRandomInt(0, 4);
+        let n = 1;
+        if(!n) return;
+        let caveList = [];
+        for(let i = 0; i < n; i++){
+            caveList.push(new Cave())
+        }
+        return caveList;
+    }
 
 }
-
+// [min, max)
 function getRandomInt(min, max) {
     const minCeiled = Math.ceil(min);
     const maxFloored = Math.floor(max);
     return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled);
-  }
+}
