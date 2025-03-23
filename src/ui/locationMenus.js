@@ -6,6 +6,7 @@ import { chopTree, forestRest } from "../utils/forestUtils.js";
 import { getCurrentLocation, getPlayer } from "../engine/gameState.js";
 import { drawPlayerBaseMenu } from "./playerMenus.js";
 import { drawBuildingBaseMenu } from "./buildingMenus.js";
+import { drawCaveBaseMenu } from "./caveMenus.js";
 
 export function drawLocationBaseMenu(Location){
 
@@ -87,7 +88,17 @@ export function drawLocationBaseMenu(Location){
             break;
         case("MOUNTAIN"):
 
-            console.log(Location);
+            Location.caves.forEach(c => {
+                let link = document.createElement("a");
+                link.href = "#"; // Or use a proper routing system
+                link.textContent = "Enter the cave";
+                link.addEventListener("click", () => drawCaveBaseMenu(Location));
+                connectionsList.appendChild(link);
+
+                // Add a line break after each connection link
+                const lineBreak = document.createElement("br");
+                connectionsList.appendChild(lineBreak);
+            })
 
             break;
         default:
