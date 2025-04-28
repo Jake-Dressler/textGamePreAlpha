@@ -13,12 +13,15 @@ import { Metal } from './src/entities/metal.js'
 import { Item, Tool } from './src/entities/item.js'
 //import { travelTo } from "./src/engine/navigation.js";
 
+
+// generate the world's metals
+generateMetalList(10);
+
 // create player and world
 // var player = new Player("test");
 setWorld(generateWorld(10,10,10));
 setCurrentLocation(getWorld()[0]);
-// generate the world's metals
-generateMetalList(10);
+
 
 
 //console.log(getMetalList());

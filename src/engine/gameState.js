@@ -55,7 +55,7 @@ export function getCurrentLocation() {
     return currentLocation;
 }
 export function generateMetalList(numMetals){
-    for (let i = 0; i < numMetals; i++){ metalList.push(new Metal()); }
+    for (let i = 0; i < numMetals; i++) metalList.push(new Metal());
 }
 export function getMetalList(){
     return metalList;

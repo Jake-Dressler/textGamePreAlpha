@@ -1,6 +1,8 @@
 import { getCurrentLocation } from "../engine/gameState.js";
 import { drawLocationBaseMenu } from "./locationMenus.js";
 import { drawPlayerBaseMenu } from "./playerMenus.js";
+import { Cave } from "../world/subLocation.js";
+
 
 
 
@@ -20,11 +22,17 @@ export function drawCaveBaseMenu(cave){
     descend.textContent = "Go deeper";
     descend.addEventListener("click", () => drawCaveSection(cave, 0));
     centerDiv.appendChild(descend);
+
+    //console.log(cave);
 }
 function drawCaveSection(cave, depth){
 
+    // console.log(depth);
+    // console.log(cave.maxDepth);
+
     var centerDiv = document.getElementById("center-content");
     centerDiv.innerHTML = "";
+
 
     let ascend = document.createElement("a");
     ascend.href = "#";
@@ -32,13 +40,19 @@ function drawCaveSection(cave, depth){
     if(depth == 0) ascend.addEventListener("click", () => drawCaveBaseMenu(cave));
     else ascend.addEventListener("click", () => drawCaveSection(cave, depth - 1));
     centerDiv.appendChild(ascend);
+    
 
     let descend = document.createElement("a");
     descend.href = "#";
     descend.textContent = "Go deeper";
-    descend.addEventListener("click", () => drawCaveSection(cave, depth + 1));
-    centerDiv.appendChild(descend);
-
+    // if(depth == 0) {
+    //     descend.addEventListener("click", () => drawCaveSection(cave, 0));
+    //     centerDiv.appendChild(descend);
+    // }
+    if(depth < cave.maxDepth){
+        descend.addEventListener("click", () => drawCaveSection(cave, depth + 1));
+        centerDiv.appendChild(descend);
+    }
 
     let mine = document.createElement("a");
     mine.href = "#"; // Or use a proper routing system

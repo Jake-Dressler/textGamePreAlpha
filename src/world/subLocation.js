@@ -16,10 +16,10 @@ export class Cave{
         for(let i = 0; i < numSections; i++){
             sectionList.push(new caveSection());
         }
-        this.sections = sectionList;
+        return sectionList;
     }
     getOre(){
-        getRandomInt(0, getMetalList().length);
+        return getMetalList()[getRandomInt(0, getMetalList().length)];
     }
 }
 

@@ -92,7 +92,7 @@ export function drawLocationBaseMenu(Location){
                 let link = document.createElement("a");
                 link.href = "#"; // Or use a proper routing system
                 link.textContent = "Enter the cave";
-                link.addEventListener("click", () => drawCaveBaseMenu(Location));
+                link.addEventListener("click", () => drawCaveBaseMenu(c));
                 connectionsList.appendChild(link);
 
                 // Add a line break after each connection link
