@@ -3,7 +3,7 @@ import { buyFromShop, sellToShop } from "../utils/shopUtils.js";
 import { drawLocationBaseMenu } from "./locationMenus.js";
 import { getPlayer } from "../engine/gameState.js";
 import { drawPlayerBaseMenu } from "./playerMenus.js";
-import { innRest, rentRoom } from "../utils/InnUtils.js";
+import { innRest, rentRoom } from "../utils/innUtils.js";
 
 export function drawBuildingBaseMenu(Building){
 
