@@ -1,4 +1,5 @@
-import { getMetalList } from "../engine/gameState.js";
+import { getMetalList, getPlayer } from "../engine/gameState.js";
+import { Ore } from "../entities/item.js";
 
 export class Cave{
 
@@ -13,7 +14,7 @@ export class Cave{
     }
     getSections(numSections){
         let sectionList = [];
-        for(let i = 0; i < numSections; i++){
+        for(let i = 0; i <= numSections; i++){
             sectionList.push(new caveSection());
         }
         return sectionList;
@@ -32,13 +33,20 @@ class caveSection{
         this.numNodes = getRandomInt(1, 3);
         this.nodesUsed = 0;
     }
-    mineNode(){
-        if(!this.nodesUsed < this.numNodes) return false;
+    mineNode(cave){
+        if(this.nodesUsed >= this.numNodes) return false;
+        if(!getPlayer().hasPick()) return false;
+        if(!player.useEnergy(getMineEnergy())) return false;
         this.nodesUsed += 1;
+        let ore = new Ore(cave.ore);
+        getPlayer().addItem(ore);
         return true;
     }
     resetNodes(){
         this.nodesUsed = 0;
+    }
+    getMineEnergy(){
+        return 40;
     }
 }
 

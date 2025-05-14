@@ -59,7 +59,7 @@ function drawCaveSection(cave, depth){
     mine.textContent = "Mine a vein";
     mine.addEventListener("click", () => {
         // ADD MINING ADD MINING ADD MINING ADD MINING ADD MINING ADD MINING ADD MINING ADD MINING ADD MINING ADD MINING ADD MINING ADD MINING 
-        //drawPlayerBaseMenu(getPlayer());
+        console.log(cave.sections[depth].mineNode(cave));
     });
     centerDiv.appendChild(mine); 
 
