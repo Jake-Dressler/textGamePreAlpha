@@ -36,7 +36,7 @@ class caveSection{
     mineNode(cave){
         if(this.nodesUsed >= this.numNodes) return false;
         if(!getPlayer().hasPick()) return false;
-        if(!player.useEnergy(getMineEnergy())) return false;
+        if(!getPlayer().useEnergy(this.getMineEnergy())) return false;
         this.nodesUsed += 1;
         let ore = new Ore(cave.ore);
         getPlayer().addItem(ore);

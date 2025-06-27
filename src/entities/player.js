@@ -1,21 +1,26 @@
-
 export class Player {
     constructor(name) {
-        this.name = name; // Player's name
-        this.health = 100; // Player's health
-        this.maxHealth = 100; // Maximum health
+        this.name = name;
+        // RPG stats
+        this.strength = 10;
+        this.dexterity = 10;
+        this.constitution = 10;
+        this.intelligence = 10;
+        this.wisdom = 10;
+        this.charisma = 10;
+
+        // Derived stats
+        this.maxHealth = 100 + (this.constitution - 10) * 5;
+        this.health = this.maxHealth;
         this.energy = 100;
         this.maxEnergy = 100;
-        this.attack = 10; // Attack strength
-        this.defense = 5; // Defense strength
-        this.inventory = []; // Inventory for items
-        this.gold = 0; // Player's currency
-        this.level = 1; // Player's level
-        this.experience = 0; // Experience points
-        this.experienceToLevelUp = 100; // Experience needed to level up
+        this.gold = 0;
+        this.level = 1;
+        this.experience = 0;
+        this.experienceToLevelUp = 100;
         this.restRate = 10;
 
-        // Tracks equipped items for specific slots
+        this.inventory = [];
         this.equippedItems = {
             weapon: null,
             armor: null,
@@ -27,41 +32,57 @@ export class Player {
     displayStats() {
         console.log(`\n=== ${this.name}'s Stats ===`);
         console.log(`Health: ${this.health}/${this.maxHealth}`);
-        console.log(`Attack: ${this.attack}`);
-        console.log(`Defense: ${this.defense}`);
+        console.log(`Strength: ${this.strength}`);
+        console.log(`Dexterity: ${this.dexterity}`);
+        console.log(`Constitution: ${this.constitution}`);
+        console.log(`Intelligence: ${this.intelligence}`);
+        console.log(`Wisdom: ${this.wisdom}`);
+        console.log(`Charisma: ${this.charisma}`);
         console.log(`Gold: ${this.gold}`);
         console.log(`Level: ${this.level}`);
         console.log(`Experience: ${this.experience}/${this.experienceToLevelUp}\n`);
     }
 
-    gainEnergy(amount){
+    // Example: Calculate attack power based on strength
+    getAttackPower() {
+        return this.strength * 2; // Adjust formula as desired
+    }
+
+    // Example: Calculate defense based on constitution and dexterity
+    getDefense() {
+        return Math.floor(this.constitution * 1.3 + this.dexterity * 0.5);
+    }
+
+    // Gain energy and ensure it doesn't exceed maxEnergy
+    gainEnergy(amount) {
         this.energy += amount;
         if (this.energy > this.maxEnergy) this.energy = this.maxEnergy;
     }
-    useEnergy(amount){
+
+    // Use energy for actions, preventing usage if not enough energy
+    useEnergy(amount) {
         let previousE = this.energy;
         this.energy -= amount;
-        if (this.energy < 0){
+        if (this.energy < 0) {
             this.energy = previousE;
             return false;
-        } 
+        }
         return true;
     }
 
-    hasAxe(){
+    // Check inventory for an axe
+    hasAxe() {
         if (!this.inventory) return false;
-        for (var i of this.inventory){
-            //console.log(i);
-            // if (i instanceof Tool && i.toolType == "axe") return true;
+        for (var i of this.inventory) {
             if (i.toolType == "axe") return true;
         }
         return false;
     }
-    hasPick(){
+
+    // Check inventory for a pick
+    hasPick() {
         if (!this.inventory) return false;
-        for (var i of this.inventory){
-            //console.log(i);
-            // if (i instanceof Tool && i.toolType == "axe") return true;
+        for (var i of this.inventory) {
             if (i.toolType == "pick") return true;
         }
         return false;
@@ -87,7 +108,7 @@ export class Player {
     }
 
     equip(item) {
-        if (!item.canEquip){
+        if (!item.canEquip) {
             alert(`${item.name} cannot be equipped`);
             return false;
         }
@@ -116,7 +137,8 @@ export class Player {
 
     // Handles taking damage
     takeDamage(amount) {
-        const damage = Math.max(amount - this.defense, 0);
+        const defense = this.getDefense();
+        const damage = Math.max(amount - defense, 1);
         this.health -= damage;
         if (this.health <= 0) {
             this.health = 0;
@@ -126,13 +148,11 @@ export class Player {
 
     // Handles attacking an enemy
     attackEnemy(enemy) {
-        // console.log(`${this.name} attacks ${enemy.name}!`);
-        return enemy.takeDamage(this.attack);
+        return enemy.takeDamage(this.getAttackPower());
     }
 
     // Gain experience and check for level-ups
     gainExperience(amount) {
-        // console.log(`${this.name} gains ${amount} experience points!`);
         this.experience += amount;
         if (this.experience >= this.experienceToLevelUp) {
             this.levelUp();
@@ -142,19 +162,27 @@ export class Player {
     // Level up the player
     levelUp() {
         this.level += 1;
-        this.experience -= this.experienceToLevelUp;
-        this.experienceToLevelUp = Math.floor(this.experienceToLevelUp * 1.5); // Increase XP requirement
-        this.maxHealth += 20;
+        this.experience = 0;
+        this.experienceToLevelUp = Math.floor(this.experienceToLevelUp * 1.25); // Increase XP requirement
+
+        // Example stat increases
+        this.strength += 2;
+        this.dexterity += 1;
+        this.constitution += 2;
+        this.intelligence += 1;
+        this.wisdom += 1;
+        this.charisma += 1;
+
+        this.maxHealth = 100 + (this.constitution - 10) * 5;
         this.health = this.maxHealth;
-        this.attack += 5;
-        this.defense += 3;
+
         console.log(`${this.name} leveled up to Level ${this.level}!`);
         this.displayStats();
     }
 
     toObject() {
         return {
-            [this.name]:{
+            [this.name]: {
                 name: this.name,
                 health: this.health,
                 maxHealth: this.maxHealth,

@@ -1,13 +1,22 @@
 // src/entities/NPC.js
 
 export class NPC {
-    constructor(name, level, health, attack, defense, dialog = []) {
+    constructor(name, level, strength = 10, dexterity = 10, constitution = 10, intelligence = 10, wisdom = 10, charisma = 10, dialog = []) {
         this.name = name; // NPC's name
         this.level = level;
-        this.health = health; // NPC's current health
-        this.maxHealth = health; // NPC's max health
-        this.attack = attack; // NPC's attack strength
-        this.defense = defense; // NPC's defense strength
+
+        // RPG stats
+        this.strength = strength;
+        this.dexterity = dexterity;
+        this.constitution = constitution;
+        this.intelligence = intelligence;
+        this.wisdom = wisdom;
+        this.charisma = charisma;
+
+        // Derived stats
+        this.maxHealth = 100 + (this.constitution - 10) * 5;
+        this.health = this.maxHealth;
+
         this.dialog = dialog; // Array of dialog lines
     }
 
@@ -15,15 +24,29 @@ export class NPC {
     displayStats() {
         console.log(`\n=== ${this.name}'s Stats ===`);
         console.log(`Health: ${this.health}/${this.maxHealth}`);
-        console.log(`Attack: ${this.attack}`);
-        console.log(`Defense: ${this.defense}\n`);
+        console.log(`Strength: ${this.strength}`);
+        console.log(`Dexterity: ${this.dexterity}`);
+        console.log(`Constitution: ${this.constitution}`);
+        console.log(`Intelligence: ${this.intelligence}`);
+        console.log(`Wisdom: ${this.wisdom}`);
+        console.log(`Charisma: ${this.charisma}\n`);
+    }
+
+    // Calculate attack power based on strength
+    getAttackPower() {
+        return this.strength * 2; // Adjust as needed
+    }
+
+    // Calculate defense based on constitution and dexterity
+    getDefense() {
+        return Math.floor(this.constitution * 1.3 + this.dexterity * 0.5);
     }
 
     // Handles taking damage
     takeDamage(amount) {
-        const damage = Math.max(amount - this.defense, 0);
+        const defense = this.getDefense();
+        const damage = Math.max(amount - defense, 1);
         this.health -= damage;
-        // console.log(`${this.name} takes ${damage} damage!`);
         if (this.health <= 0) {
             this.health = 0;
             console.log(`${this.name} has been defeated!`);
@@ -34,11 +57,9 @@ export class NPC {
     // Handles attacking a Player or another entity
     attackEnemy(enemy) {
         if (!enemy || typeof enemy.takeDamage !== 'function') {
-            // console.log(`${this.name} tries to attack, but there's no valid target!`);
             return;
         }
-        // console.log(`${this.name} attacks ${enemy.name}!`);
-        return enemy.takeDamage(this.attack);
+        return enemy.takeDamage(this.getAttackPower());
     }
 
     // Interacts with the player (e.g., speaks a line of dialog)
@@ -54,12 +75,16 @@ export class NPC {
     // Converts the NPC instance to a JSON object
     toObject() {
         return {
-            [this.name]:{
+            [this.name]: {
                 name: this.name,
                 health: this.health,
                 maxHealth: this.maxHealth,
-                attack: this.attack,
-                defense: this.defense,
+                strength: this.strength,
+                dexterity: this.dexterity,
+                constitution: this.constitution,
+                intelligence: this.intelligence,
+                wisdom: this.wisdom,
+                charisma: this.charisma,
                 dialog: this.dialog
             }
         };

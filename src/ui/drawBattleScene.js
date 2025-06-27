@@ -70,7 +70,9 @@ function drawPostBattleScene(battle) {
     let message = document.createElement("p"); 
     let link = document.createElement("a");
 
-    if (battle.playerWin) {
+    if (battle.fleeAttempted && !battle.playerWin) {
+        message.textContent = "You successfully fled the battle!";
+    } else if (battle.playerWin) {
         message.textContent = "You won the battle";
     } else {
         message.textContent = "You lost the battle";
@@ -93,13 +95,49 @@ function drawPostBattleScene(battle) {
 }
 
 function drawLastTurn(div, battle){
-    if(battle.enemyTook || battle.playerTook){
-        let enemyTakes = document.createElement('p');
-        enemyTakes.textContent = `Enemy took: ${battle.enemyTook} damage`;
+    if(battle.playerTook){
         let playerTakes = document.createElement('p');
         playerTakes.textContent = `Player took: ${battle.playerTook} damage`;
-
         div.appendChild(playerTakes);
+    }
+    if(battle.enemyTook){
+        let enemyTakes = document.createElement('p');
+        enemyTakes.textContent = `Enemy took: ${battle.enemyTook} damage`;
         div.appendChild(enemyTakes);
     }
+    if(battle.fleeAttempted){
+        let fleeMessage = document.createElement('p');
+        fleeMessage.textContent = "Player attempted to flee but failed";
+        div.appendChild(fleeMessage);
+    }    function drawPostBattleScene(battle) {
+        let centerDiv = document.getElementById("center-content");
+        centerDiv.innerHTML = "";
+    
+        let message = document.createElement("p"); 
+        let link = document.createElement("a");
+    
+        if (battle.fleeAttempted && !battle.playerWin) {
+            message.textContent = "You successfully fled the battle!";
+        } else if (battle.playerWin) {
+            message.textContent = "You won the battle";
+        } else {
+            message.textContent = "You lost the battle";
+        }
+    
+        link.textContent = "Continue";
+        link.addEventListener("click", () =>{
+            drawPlayerBaseMenu(getPlayer()); 
+            drawLocationBaseMenu(getCurrentLocation())
+        });
+    
+        if(battle.expGain){
+            let xpGainMessage = document.createElement("p"); 
+            xpGainMessage.textContent = `Player gains ${battle.expGain} experience`;
+            centerDiv.appendChild(xpGainMessage);
+        }
+    
+        centerDiv.appendChild(message);
+        centerDiv.appendChild(link);
+    }
+    
 }

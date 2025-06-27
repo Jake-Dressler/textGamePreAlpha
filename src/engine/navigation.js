@@ -4,12 +4,14 @@ import { drawLocationMap, drawLocationMapSimple } from "../ui/worldMap.js";
 import { updateClock } from '../ui/drawClock.js';
 import { getTimeToTravel } from "../utils/timeToTravel.js";
 import { drawPlayerBaseMenu } from '../ui/playerMenus.js';
+import { drawBattleScene } from "../ui/drawBattleScene.js";
+import { NPC } from "../entities/npc.js";
 
-export function travelTo(nextLocation) {
+export async function travelTo(nextLocation) {
     let currentLocation = getCurrentLocation();
-    if (!currentLocation.connections){ console.log("WARNING: location has no connections"); return;} // This should not be possible unless delaunay fails
-    //if (getPlayerEnergy() < COSTofTRAVEL){};   ADD ENERGY CHECK LATER
+    if (!currentLocation.connections){ console.log("WARNING: location has no connections"); return;}
     if (Object.keys(currentLocation.connections).includes(nextLocation)) {
+
         // Find the next location object in the towns array
         let nextLocObj = getWorld().find(loc => loc.name === nextLocation);
         if (nextLocObj) {
@@ -26,6 +28,7 @@ export function travelTo(nextLocation) {
 
             // Update the current location
             setCurrentLocation(nextLocObj);
+
             drawLocationBaseMenu(getCurrentLocation());
             let mapView = getMapType();
 
@@ -43,4 +46,16 @@ export function travelTo(nextLocation) {
 // calculate energy use by distance, 
 function getTravelEnergyUse(dist){
     return Math.ceil(dist / 6);
+}
+
+// Call this after player moves to a new location
+function checkForRandomEncounter() {
+    const encounterChance = 0.2; // 20% chance
+    if (Math.random() < encounterChance) {
+        // Generate a random NPC for the encounter
+        const randomEnemy = new NPC("Wild Beast", 1 + Math.floor(Math.random() * 10), 10, 10, 10, 5, 5, 5, []);
+        drawBattleScene(randomEnemy);
+        return true;
+    }
+    return false;
 }
