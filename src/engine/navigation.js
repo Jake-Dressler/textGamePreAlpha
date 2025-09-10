@@ -54,7 +54,7 @@ function checkForRandomEncounter() {
     if (Math.random() < encounterChance) {
         // Generate a random NPC for the encounter
         const randomEnemy = new NPC("Wild Beast", 1 + Math.floor(Math.random() * 10), 10, 10, 10, 5, 5, 5, []);
-        drawBattleScene(randomEnemy);
+        //drawBattleScene(randomEnemy);
         return true;
     }
     return false;
